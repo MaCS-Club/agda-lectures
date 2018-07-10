@@ -1,7 +1,7 @@
 ---
 author: Igor Fedorov
 title: Моноиды и полугруппы
-date: July 15 2018
+date: July 22 2018
 ---
 ## Nat
 Вспомним определение натуральных чисел:
@@ -42,6 +42,12 @@ sym : {A : Set} {x y : A} → x ≡ y → y ≡ x
 sym = ?
 ```
 
+## Свойства равенства термов
+```agda
+sym : {A : Set} {x y : A} → x ≡ y → y ≡ x
+sym refl = refl
+```
+
 ## Записи - 1
 Создать запись можно используя ключевое слово `record`:
 ```agda
@@ -61,7 +67,7 @@ Pair.snd : {A B : Set} → Pair A B → B
 ## Записи - 3
 Создать элемент данного типа можно:
 ```agda
-p23 : Pair Nat Nat
+p23 : Pair ℕ ℕ
 p23 = record { fst = 2; snd = 3 }
 ```
 
@@ -74,7 +80,7 @@ record Pair (A B : Set) : Set where
     fst : A
     snd : B
 
-p45 : Pair Nat Nat
+p45 : Pair ℕ ℕ
 p45 = 4 , 5
 ```
 

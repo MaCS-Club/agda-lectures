@@ -54,7 +54,6 @@ firstV (x :: _) = x
 data ℕ< : ℕ → Set where
   zero : ∀ {n} → ℕ< (1 + n)
   1+ : ∀ {n} → ℕ< n → ℕ< (1 + n)
-{-# BUILTIN NATURAL ℕ< #-}
 
 
 three : ℕ< 7

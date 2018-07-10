@@ -109,5 +109,3 @@ _+_ : ℕ → ℕ → ℕ
 zero + m = m
 (suc n) + m = suc (n + m)
 ```
-
-# TO BE CONTINUED...
