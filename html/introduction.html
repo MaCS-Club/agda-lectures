@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Igor Fedorov">
+  <meta name="dcterms.date" content="2018-01-28">
+  <title>Agda Introduction</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/reveal.css">
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/theme/black.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'http://lab.hakim.se/reveal-js/css/print/pdf.css' : 'http://lab.hakim.se/reveal-js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="http://lab.hakim.se/reveal-js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Agda Introduction</h1>
+  <p class="author">Igor Fedorov</p>
+  <p class="date">January 28, 2018</p>
+</section>
+
+<section id="что-такое-agda" class="slide level1">
+<h1>Что такое Agda?</h1>
+<p>Agda — чистый функциональный язык программирования с зависимыми типами. Теоретической основой Agda служит интуиционистская теория типов Мартин-Лёфа, которая расширена набором конструкций, полезных для практического программирования.</p>
+</section>
+<section id="почему-agda" class="slide level1">
+<h1>Почему Agda?</h1>
+<ul>
+<li>Реализиует исчисление конструкций</li>
+<li>Гарантирует завершаемость программ</li>
+<li>Вместе с Coq является языком формализации HoTT</li>
+<li>Выглядит более человечно, чем Coq (синтаксис Agda очень похож на Haskell)</li>
+<li>Одновременно прогрессивный и стабильный язык</li>
+</ul>
+</section>
+<section id="установка" class="slide level1">
+<h1>Установка</h1>
+<p>Если у вас уже стоит Stack, то установить Agda можно командой</p>
+<pre class="shell"><code>stack install Agda</code></pre>
+<p>Иначе установите сначала Stack</p>
+</section>
+<section id="настройка" class="slide level1">
+<h1>Настройка</h1>
+<p>Для написания программ рекомендуется использовать либо Emacs, либо Atom. Я остановлюсь на последнем. Для удобной работы нужно поставить плагины <em>agda-mode</em> и <em>language-agda</em>, сделать это можно командами</p>
+<pre class="shell"><code>apm install language-agda
+apm install agda-mode</code></pre>
+</section>
+<section id="hello" class="slide level1">
+<h1>Hello???</h1>
+<p>Наверное вы бы хотели увидеть здесь небольшую программу выводящую в консоль <em>Hello, World!</em>, но увы, а на самом деле к счастью, её здесь не будет. Вместо этого мы реализуем множество натуральных чисел в аксиоматике Пеано.</p>
+</section>
+<section id="hello-peano" class="slide level1">
+<h1>Hello, Peano!</h1>
+<p>Agda не загружает автоматически стандартную библиотеку. Поэтому мы можем начать с нуля и не бояться коллизий.</p>
+<p>Для начала создадим файл <em>Nat.agda</em> и создадим в нём модуль</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">module</span> Nat <span class="kw">where</span></a></code></pre></div>
+<p>(в отличии от Haskell указанение модуля обязательно)</p>
+</section>
+<section id="ℕ" class="slide level1">
+<h1>ℕ</h1>
+<p>Определение натуральных чисел на Agda с помощью структурной индукции будет выглядеть так:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">data</span> ℕ <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">    zero <span class="ot">:</span> ℕ</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">    suc <span class="ot">:</span> ℕ <span class="ot">→</span> ℕ</a></code></pre></div>
+<p>(Agda поддерживает юникодные символы. С помощью ранее установленного плагина можно напечатать символы ℕ и → с помощью команд <code>\bN</code> и <code>\-&gt;</code> соответственно)</p>
+</section>
+<section id="типы-у-типов" class="slide level1">
+<h1>Типы у типов</h1>
+<p>В определении натуральных чисел у нас было указано <code>ℕ : Set</code>, что в точности означает <em>ℕ имеет тип Set</em>.</p>
+<p>Т.к. в Agda есть зависимые типы она не различает термы и типы, поэтому у каждого типа есть тип.</p>
+<p>Какой же тип имеет Set?</p>
+</section>
+<section id="парадокс-рассела" class="slide level1">
+<h1>Парадокс Рассела</h1>
+<p>Для того, чтобы избежать парадокса Рассела, тип Set имеет тип не Set, а Set₁, который в свою очередь имеет тип Set₂ и т.д. Бесконечная иерархия типов позволяет избежать ситуации в которой в типе содержится он сам.</p>
+</section>
+<section id="сложение" class="slide level1">
+<h1>Сложение</h1>
+<p>Давайте определим сигнатуру функции сложения</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="ot">_</span>+<span class="ot">_</span> <span class="ot">:</span> ℕ <span class="ot">→</span> ℕ <span class="ot">→</span> ℕ</a></code></pre></div>
+<p>(В отличии от Haskell указание сигнатуры функций обязательно)</p>
+</section>
+<section id="миксфиксы" class="slide level1">
+<h1>Миксфиксы</h1>
+<p>Agda поддерживает т.н. миксфиксную запись т.е. подставлять аргументы можно прямо в название функции на место “дырок”. Например, метод с сигнатурой</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb6-1" data-line-number="1">if<span class="ot">_</span>then<span class="ot">_</span>else<span class="ot">_</span> <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span> a <span class="ot">}</span> <span class="ot">→</span> Bool <span class="ot">→</span> a <span class="ot">→</span> a <span class="ot">→</span> a</a></code></pre></div>
+<p>можно вызвать и как <code>if a then b else c</code>, и как <code>if_then_else_ a b c</code></p>
+</section>
+<section id="сложение-1" class="slide level1">
+<h1>Сложение</h1>
+<p>Вместе с реализацией функция сложения будет выглядеть:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="ot">_</span>+<span class="ot">_</span> <span class="ot">:</span> ℕ <span class="ot">→</span> ℕ <span class="ot">→</span> ℕ</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">zero + m <span class="ot">=</span> m</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="ot">(</span>suc n<span class="ot">)</span> + m <span class="ot">=</span> suc <span class="ot">(</span>n + m<span class="ot">)</span></a></code></pre></div>
+</section>
+<section id="итог" class="slide level1">
+<h1>Итог</h1>
+<p>Финальный листинг модуля выглядит так:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">module</span> Nat <span class="kw">where</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw">data</span> ℕ <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">    zero <span class="ot">:</span> ℕ</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">    suc <span class="ot">:</span> ℕ <span class="ot">→</span> ℕ</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="ot">_</span>+<span class="ot">_</span> <span class="ot">:</span> ℕ <span class="ot">→</span> ℕ <span class="ot">→</span> ℕ</a>
+<a class="sourceLine" id="cb8-8" data-line-number="8">zero + m <span class="ot">=</span> m</a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="ot">(</span>suc n<span class="ot">)</span> + m <span class="ot">=</span> suc <span class="ot">(</span>n + m<span class="ot">)</span></a></code></pre></div>
+</section>
+<section id="to-be-continued" class="slide level1">
+<h1>TO BE CONTINUED…</h1>
+</section>
+    </div>
+  </div>
+
+  <script src="http://lab.hakim.se/reveal-js/lib/js/head.min.js"></script>
+  <script src="http://lab.hakim.se/reveal-js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'http://lab.hakim.se/reveal-js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'http://lab.hakim.se/reveal-js/plugin/zoom-js/zoom.js', async: true },
+          { src: 'http://lab.hakim.se/reveal-js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
