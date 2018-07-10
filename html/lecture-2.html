@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Igor Fedorov">
+  <title>Зависимые типы - Векторы</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/reveal.css">
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/theme/black.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'http://lab.hakim.se/reveal-js/css/print/pdf.css' : 'http://lab.hakim.se/reveal-js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="http://lab.hakim.se/reveal-js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Зависимые типы - Векторы</h1>
+  <p class="author">Igor Fedorov</p>
+  <p class="date">June 17 2018</p>
+</section>
+
+<section id="nat" class="slide level2">
+<h2>Nat</h2>
+<p>Вспомним определение натуральных чисел:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">data</span> ℕ <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">    zero <span class="ot">:</span> ℕ</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">    suc <span class="ot">:</span> ℕ <span class="ot">→</span> ℕ</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="pp">{-# BUILTIN NATURAL ℕ #-}</span></a></code></pre></div>
+</section>
+<section id="индуктивные-типы" class="slide level2">
+<h2>Индуктивные типы</h2>
+<ul>
+<li>Основной способ для создания новых типов в функциональных языках программирования</li>
+<li>Описывает как можно построить терм на основе перечня конструкторов</li>
+<li>Например, список это сумма:
+<ul>
+<li>Пустой список</li>
+<li>Первый элемент и хвост списка</li>
+</ul></li>
+</ul>
+</section>
+<section id="списки" class="slide level2">
+<h2>Списки</h2>
+<p>Список в Agda можно определить так:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">infixr</span> <span class="dv">4</span> <span class="ot">_</span>::<span class="ot">_</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">data</span> List<span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">  [] <span class="ot">:</span> List A</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">  <span class="ot">_</span>::<span class="ot">_</span> <span class="ot">:</span> A <span class="ot">→</span> List A <span class="ot">→</span> List A</a></code></pre></div>
+</section>
+<section id="списки-1" class="slide level2">
+<h2>Списки</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb3-1" data-line-number="1">empty <span class="ot">:</span> List ℕ</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">empty <span class="ot">=</span> []</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">upto3 <span class="ot">:</span> List ℕ</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">upto3 <span class="ot">=</span> <span class="dv">0</span> :: <span class="dv">1</span> :: <span class="dv">2</span> :: <span class="dv">3</span> :: []</a></code></pre></div>
+</section>
+<section id="сопоставление-с-образцом" class="slide level2">
+<h2>Сопоставление с образцом</h2>
+<p>Вы можете работать с индуктивными типами с помощью сопоставления с образцом. Анализируя по сути дела внешний конструктор аргумента.</p>
+<p>Например, мы можем определить функцию <em>append</em> сопоставляя с образцом первый аргумент:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb4-1" data-line-number="1">append <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>A<span class="ot">}</span> <span class="ot">→</span> List A <span class="ot">→</span> List A <span class="ot">→</span> List A</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">append [] ys <span class="ot">=</span> ys</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">append <span class="ot">(</span>x :: xs<span class="ot">)</span> ys <span class="ot">=</span> x :: append xs ys</a></code></pre></div>
+</section>
+<section id="получение-головы-списка" class="slide level2">
+<h2>Получение головы списка</h2>
+<p>Попробуем написать функцию возвращающую голову списка:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb5-1" data-line-number="1">first <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>A<span class="ot">}</span> <span class="ot">→</span> List A <span class="ot">→</span> A</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">first xs <span class="ot">=</span> ?</a></code></pre></div>
+</section>
+<section id="получение-головы-списка-1" class="slide level2">
+<h2>Получение головы списка</h2>
+<p>Попробуем написать функцию возвращающую голову списка:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb6-1" data-line-number="1">first <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>A<span class="ot">}</span> <span class="ot">→</span> List A <span class="ot">→</span> A</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">first [] <span class="ot">=</span> ?</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">first <span class="ot">(</span>x :: <span class="ot">_)</span> <span class="ot">=</span> ?</a></code></pre></div>
+</section>
+<section id="получение-головы-списка-2" class="slide level2">
+<h2>Получение головы списка</h2>
+<p>Попробуем написать функцию возвращающую голову списка:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb7-1" data-line-number="1">first <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>A<span class="ot">}</span> <span class="ot">→</span> List A <span class="ot">→</span> A</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">first [] <span class="ot">=</span> ?</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">first <span class="ot">(</span>x :: <span class="ot">_)</span> <span class="ot">=</span> x</a></code></pre></div>
+</section>
+<section id="получение-головы-списка-3" class="slide level2">
+<h2>Получение головы списка</h2>
+<p>Попробуем написать функцию возвращающую голову списка:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">data</span> Option<span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">  Some <span class="ot">:</span> A <span class="ot">→</span> Option A</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">  None <span class="ot">:</span> Option A</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">first <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>A<span class="ot">}</span> <span class="ot">→</span> List A <span class="ot">→</span> Option A</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">first [] <span class="ot">=</span> None</a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">first <span class="ot">(</span>x :: <span class="ot">_)</span> <span class="ot">=</span> Some x</a></code></pre></div>
+</section>
+<section id="проблема" class="slide level2">
+<h2>Проблема</h2>
+<p>Но иногда система типов может нам мешать:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="ot">...</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">let</span> queue <span class="ot">=</span> upto3 <span class="kw">in</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw">let</span> min <span class="ot">=</span> first queue <span class="kw">in</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="kw">let</span> x <span class="ot">=</span> min + <span class="dv">5</span> <span class="kw">in</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="ot">...</span></a></code></pre></div>
+</section>
+<section id="зависимые-типы" class="slide level2">
+<h2>Зависимые типы</h2>
+<ul>
+<li>Типы зависящие от значения</li>
+<li>Помогают проверять более жесткие ограничения во время компиляции</li>
+<li>Например: список длинны n</li>
+</ul>
+</section>
+<section id="зависимые-типы---векторы" class="slide level2">
+<h2>Зависимые типы - Векторы</h2>
+<p>Вспомним определние списка:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">data</span> List<span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">[] <span class="ot">:</span> List A</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="ot">_</span>::<span class="ot">_</span> <span class="ot">:</span> A <span class="ot">→</span> List A <span class="ot">→</span> List A</a></code></pre></div>
+</section>
+<section id="зависимые-типы---векторы-1" class="slide level2">
+<h2>Зависимые типы - Векторы</h2>
+<p>Вспомним определние списка:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">data</span> List<span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">[] <span class="ot">:</span> List A</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="ot">_</span>::<span class="ot">_</span> <span class="ot">:</span> A <span class="ot">→</span> List A <span class="ot">→</span> List A</a></code></pre></div>
+<p>Мы можем определить список длинны <em>n</em> так:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">data</span> Vec<span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> ℕ <span class="ot">→</span> <span class="dt">Set</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">  [] <span class="ot">:</span> Vec A <span class="dv">0</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">  <span class="ot">_</span>::<span class="ot">_</span> <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>n<span class="ot">}</span> <span class="ot">→</span> A <span class="ot">→</span> Vec A n <span class="ot">→</span> Vec A <span class="ot">(</span><span class="dv">1</span> + n<span class="ot">)</span></a></code></pre></div>
+</section>
+<section id="векторы" class="slide level2">
+<h2>Векторы</h2>
+<p>Примеры можно оставить фактически без изменений:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb13-1" data-line-number="1">emptyV <span class="ot">:</span> Vec ℕ <span class="dv">0</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">emptyV <span class="ot">=</span> []</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">upto3V <span class="ot">:</span> Vec ℕ <span class="dv">4</span></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">upto3V <span class="ot">=</span> <span class="dv">0</span> :: <span class="dv">1</span> :: <span class="dv">2</span> :: <span class="dv">3</span> :: []</a></code></pre></div>
+</section>
+<section id="векторы-1" class="slide level2">
+<h2>Векторы</h2>
+<p>То же самое для append, никаких изменений за исключением типа:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb14-1" data-line-number="1">appendV <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>A m n<span class="ot">}</span> <span class="ot">→</span> Vec A m <span class="ot">→</span> Vec A n <span class="ot">→</span> Vec A <span class="ot">(</span>m + n<span class="ot">)</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">appendV [] ys <span class="ot">=</span> ys</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">appendV <span class="ot">(</span>x :: xs<span class="ot">)</span> ys <span class="ot">=</span> x :: appendV xs ys</a></code></pre></div>
+</section>
+<section id="получение-головы-списка---revisited" class="slide level2">
+<h2>Получение головы списка - revisited</h2>
+<p>Используя Векторы мы можем реализовать функцию first:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb15-1" data-line-number="1">firstV <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>A n<span class="ot">}</span> <span class="ot">→</span> Vec A <span class="ot">(</span><span class="dv">1</span> + n<span class="ot">)</span> <span class="ot">→</span> A</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">firstV xs <span class="ot">=</span> ?</a></code></pre></div>
+</section>
+<section id="получение-головы-списка---revisited-1" class="slide level2">
+<h2>Получение головы списка - revisited</h2>
+<p>Используя Векторы мы можем реализовать функцию first:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb16-1" data-line-number="1">firstV <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>A n<span class="ot">}</span> <span class="ot">→</span> Vec A <span class="ot">(</span><span class="dv">1</span> + n<span class="ot">)</span> <span class="ot">→</span> A</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">firstV <span class="ot">(</span>x :: xs<span class="ot">)</span> <span class="ot">=</span> ?</a></code></pre></div>
+</section>
+<section id="получение-головы-списка---revisited-2" class="slide level2">
+<h2>Получение головы списка - revisited</h2>
+<p>Используя Векторы мы можем реализовать функцию first:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb17-1" data-line-number="1">firstV <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>A n<span class="ot">}</span> <span class="ot">→</span> Vec A <span class="ot">(</span><span class="dv">1</span> + n<span class="ot">)</span> <span class="ot">→</span> A</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">firstV <span class="ot">(</span>x :: <span class="ot">_)</span> <span class="ot">=</span> x</a></code></pre></div>
+</section>
+<section id="проблема---revisited" class="slide level2">
+<h2>Проблема - revisited</h2>
+<div class="sourceCode" id="cb18"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="ot">...</span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="kw">let</span> queue <span class="ot">=</span> upto3 <span class="kw">in</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="kw">let</span> min <span class="ot">=</span> firstV queue <span class="kw">in</span></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4"><span class="kw">let</span> x <span class="ot">=</span> min + <span class="dv">5</span> <span class="kw">in</span></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="ot">...</span></a></code></pre></div>
+</section>
+<section id="обобщение-проблемы" class="slide level2">
+<h2>Обобщение проблемы</h2>
+<p>Предыдущая проблема является частным случаем более общей проблемы: ошибка <em>выхода за границы</em>. Используя Векторы мы можем решить эту проблему в более общем случае.</p>
+</section>
+<section id="обобщение-проблемы-1" class="slide level2">
+<h2>Обобщение проблемы</h2>
+<p>Предыдущая проблема является частным случаем более общей проблемы: ошибка <em>выхода за границы</em>. Используя Векторы мы можем решить эту проблему в более общем случае.</p>
+<p>Мы хотим реализовать функцию:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="ot">_</span>!<span class="ot">_</span> <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>A n<span class="ot">}</span> <span class="ot">→</span> Vec A n <span class="ot">→</span> ℕ&lt; n <span class="ot">→</span> A</a></code></pre></div>
+<p>Как можно определить ℕ&lt;?</p>
+</section>
+<section id="тип-ℕ" class="slide level2">
+<h2>Тип ℕ&lt;</h2>
+<p>Что такое число меньшее n? Можем ли мы дать индуктивное определение?</p>
+</section>
+<section id="тип-ℕ-1" class="slide level2">
+<h2>Тип ℕ&lt;</h2>
+<p>Что такое число меньшее n? Можем ли мы дать индуктивное определение?</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">data</span> ℕ&lt; <span class="ot">:</span> ℕ <span class="ot">→</span> <span class="dt">Set</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">  zero <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>n<span class="ot">}</span> <span class="ot">→</span> ℕ&lt; <span class="ot">(</span><span class="dv">1</span> + n<span class="ot">)</span></a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">  1+ <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>n<span class="ot">}</span> <span class="ot">→</span> ℕ&lt; n <span class="ot">→</span> ℕ&lt; <span class="ot">(</span><span class="dv">1</span> + n<span class="ot">)</span></a>
+<a class="sourceLine" id="cb20-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb20-5" data-line-number="5">three <span class="ot">:</span> ℕ&lt; <span class="dv">7</span></a>
+<a class="sourceLine" id="cb20-6" data-line-number="6">three <span class="ot">=</span> 1+ <span class="ot">(</span>1+ <span class="ot">(</span>1+ zero<span class="ot">))</span></a>
+<a class="sourceLine" id="cb20-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb20-8" data-line-number="8">three&#39; <span class="ot">:</span> ℕ&lt; <span class="dv">10</span></a>
+<a class="sourceLine" id="cb20-9" data-line-number="9">three&#39; <span class="ot">=</span> 1+ <span class="ot">(</span>1+ <span class="ot">(</span>1+ zero<span class="ot">))</span></a></code></pre></div>
+</section>
+<section id="lookup" class="slide level2">
+<h2>Lookup</h2>
+<p>Теперь мы можем определить оператор <code>_!_</code>:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="ot">_</span>!<span class="ot">_</span> <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>A n<span class="ot">}</span> <span class="ot">→</span> Vec A n <span class="ot">→</span> ℕ&lt; n <span class="ot">→</span> A</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="ot">(</span>x :: <span class="ot">_)</span> ! zero <span class="ot">=</span> x</a>
+<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="ot">(_</span> :: xs<span class="ot">)</span> ! <span class="ot">(</span>1+ m<span class="ot">)</span> <span class="ot">=</span> xs ! m</a></code></pre></div>
+<p>Теперь мы можем отлавливать ошибку выхода за границы во время компиляции:</p>
+</section>
+<section id="lookup-1" class="slide level2">
+<h2>Lookup</h2>
+<p>Теперь мы можем определить оператор <code>_!_</code>:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="ot">_</span>!<span class="ot">_</span> <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>A n<span class="ot">}</span> <span class="ot">→</span> Vec A n <span class="ot">→</span> ℕ&lt; n <span class="ot">→</span> A</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="ot">(</span>x :: <span class="ot">_)</span> ! zero <span class="ot">=</span> x</a>
+<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="ot">(_</span> :: xs<span class="ot">)</span> ! <span class="ot">(</span>1+ m<span class="ot">)</span> <span class="ot">=</span> xs ! m</a></code></pre></div>
+<p>Теперь мы можем отлавливать ошибку выхода за границы во время компиляции:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb23-1" data-line-number="1">one <span class="ot">=</span> upto3V ! <span class="ot">(</span>1+ zero<span class="ot">)</span></a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">out-of-bounds <span class="ot">=</span> upto3V ! <span class="ot">(</span>1+ <span class="ot">(</span>1+ <span class="ot">(</span>1+ <span class="ot">(</span>1+ zero<span class="ot">))))</span></a></code></pre></div>
+</section>
+<section id="lookup-2" class="slide level2">
+<h2>Lookup</h2>
+<div class="sourceCode" id="cb24"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb24-1" data-line-number="1">out-of-bounds <span class="ot">=</span> upto3V ! <span class="ot">(</span>1+ <span class="ot">(</span>1+ <span class="ot">(</span>1+ <span class="ot">(</span>1+ zero<span class="ot">))))</span></a></code></pre></div>
+<blockquote>
+<p>Type mismatch: expected: zero actual: suc _n_103 when checking that the expression 1+ (1+ (1+ (1+ zero))) has type ℕ&lt; 4</p>
+</blockquote>
+</section>
+    </div>
+  </div>
+
+  <script src="http://lab.hakim.se/reveal-js/lib/js/head.min.js"></script>
+  <script src="http://lab.hakim.se/reveal-js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'http://lab.hakim.se/reveal-js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'http://lab.hakim.se/reveal-js/plugin/zoom-js/zoom.js', async: true },
+          { src: 'http://lab.hakim.se/reveal-js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
