@@ -1,6 +1,6 @@
 ---
 author: Igor Fedorov
-title: Абстрактная алгебра - 1
+title: Моноиды и полугруппы
 date: July 15 2018
 ---
 ## Nat
