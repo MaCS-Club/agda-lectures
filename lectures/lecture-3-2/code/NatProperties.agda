@@ -1,7 +1,19 @@
-module lecture-4 where
+module NatProperties where
 
-open import lecture-3
-open import PropositionalEquality
+open import Nat
+open import PropositionalEquality { ℕ }
+
++-assoc : (a b c : ℕ) → (a + b) + c ≡ a + (b + c)
++-assoc zero _ _ = refl
++-assoc (suc a) b c = cong suc (+-assoc a b c)
+
++-leftUnit : (n : ℕ) → (zero + n) ≡ n
++-leftUnit m = refl
+
++-rightUnit : (n : ℕ) → (n + zero) ≡ n
++-rightUnit zero = refl
++-rightUnit (suc n) = cong suc (+-rightUnit n)
+
 
 +-suc : ∀ m n → (suc m + n) ≡ (m + suc n)
 +-suc zero m = refl
@@ -14,18 +26,11 @@ open import PropositionalEquality
 +-comm` : ∀ a b → a + b ≡ b + a
 +-comm` zero b = sym(+-rightUnit b)
 +-comm` (suc a) b = begin
-    suc a + b ≡⟨⟩
+    suc a + b   ≡⟨⟩
     suc (a + b) ≡⟨ cong suc (+-comm a b) ⟩
-    suc (b + a) ≡⟨ +-suc b a ⟩
-    b + suc a  ∎
-
-infixl 7 _*_
-
-_*_ : ℕ → ℕ → ℕ
-zero * _ = zero
-suc n * m = m + n * m
-
-{-# BUILTIN NATTIMES _*_ #-}
+    suc (b + a) ≡⟨⟩
+    suc b + a   ≡⟨ +-suc b a ⟩
+    b + suc a   ∎
 
 *-leftZero : ∀ n → 0 * n ≡ 0
 *-leftZero _ = refl
@@ -33,7 +38,7 @@ suc n * m = m + n * m
 *-rightZero : ∀ n → n * 0 ≡ 0
 *-rightZero 0 = refl
 *-rightZero (suc a) = *-rightZero a
-
+Π
 *-rightUnit : ∀ n → n * 1 ≡ n
 *-rightUnit zero = refl
 *-rightUnit (suc a) = cong suc (*-rightUnit a)

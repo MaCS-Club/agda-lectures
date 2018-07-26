@@ -1,38 +1,18 @@
-module ex1 where
+module NatProperties where
 
 open import Nat
 open import PropositionalEquality { ℕ }
 
-record Semigroup (A : Set) (_∘_ : A → A → A) : Set where
-  field
-    assoc : (a b c : A) → (a ∘ b) ∘ c ≡ a ∘ (b ∘ c)
-
-+-assoc : ∀ a b c → (a + b) + c ≡ a + (b + c)
++-assoc : (a b c : ℕ) → (a + b) + c ≡ a + (b + c)
 +-assoc zero _ _ = refl
 +-assoc (suc a) b c = cong suc (+-assoc a b c)
 
-ℕ+-isSemigroup : Semigroup ℕ _+_
-ℕ+-isSemigroup = record
-  {
-    assoc = +-assoc
-  }
++-leftUnit : (n : ℕ) → (zero + n) ≡ n
++-leftUnit m = refl
 
-
-record Monoid (A : Set) (_∘_ : A → A → A) (id : A): Set where
-  field
-    leftUnit : (a : A) → (id ∘ a) ≡ a
-    rightUnit : (a : A) → (a ∘ id) ≡ a
-    assoc : (a b c : A) → (a ∘ b) ∘ c ≡ a ∘ (b ∘ c)
-
-+-rightUnit : ∀ a → (a + zero) ≡ a
-+-rightUnit = ?
-
-+-leftUnit : ∀ a → (zero + a) ≡ a
-+-leftUnit = ?
-
-ℕ+-isMonoid : Monoid ℕ _+_ zero
-ℕ+-isMonoid = ?
-
++-rightUnit : (n : ℕ) → (n + zero) ≡ n
++-rightUnit zero = refl
++-rightUnit (suc n) = cong suc (+-rightUnit n)
 
 +-suc : ∀ m n → (suc m + n) ≡ (m + suc n)
 +-suc zero m = refl

@@ -1,6 +1,6 @@
 ---
 author: Igor Fedorov
-title: Зависимые типы - Векторы
+title: Cписки и Векторы
 date: June 17 2018
 ---
 

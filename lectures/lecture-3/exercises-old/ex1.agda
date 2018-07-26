@@ -1,11 +1,9 @@
-module lecture-3 where
+module ex1 where
 
 data ℕ : Set where
     zero : ℕ
     suc : ℕ → ℕ
 {-# BUILTIN NATURAL ℕ #-}
-
-infixl 6 _+_
 
 _+_ : ℕ → ℕ → ℕ
 zero  + m = m
@@ -21,10 +19,10 @@ cong : {A B : Set} {x y : A} → (f : A → B) → x ≡ y → f x ≡ f y
 cong _ refl = refl
 
 sym : {A : Set} {x y : A} → x ≡ y → y ≡ x
-sym refl = refl
+sym = ?
 
 trans : {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
-trans refl refl = refl
+trans = ?
 
 record Semigroup (A : Set) (_∘_ : A → A → A) : Set where
   field
@@ -47,21 +45,8 @@ record Monoid (A : Set) (_∘_ : A → A → A) (id : A): Set where
     rightUnit : (a : A) → (a ∘ id) ≡ a
     assoc : (a b c : A) → (a ∘ b) ∘ c ≡ a ∘ (b ∘ c)
 
-+-leftUnit : (n : ℕ) → (zero + n) ≡ n
-+-leftUnit m = refl
--- +-leftUnit zero = refl
--- +-leftUnit (suc n) = cong suc (+-leftUnit n)
-
-+-rightUnit : (n : ℕ) → (n + zero) ≡ n
-+-rightUnit zero = refl
-+-rightUnit (suc n) = cong suc (+-rightUnit n)
-
 ℕ+-isMonoid : Monoid ℕ _+_ zero
-ℕ+-isMonoid = record {
-    assoc = +-assoc;
-    rightUnit = +-rightUnit;
-    leftUnit = +-leftUnit
-  }
+ℕ+-isMonoid = ?
 
 infixr 5 _::_ _++_
 
@@ -73,23 +58,5 @@ _++_ : ∀ {A} → List A → List A → List A
 [] ++ ys = ys
 (x :: xs) ++ ys = x :: xs ++ ys
 
-List-rightUnit : {A : Set} → (list : List A) → (list ++ []) ≡ list
-List-rightUnit [] = refl
-List-rightUnit (x :: xs) = cong (λ tail → x :: tail) (List-rightUnit xs)
-
-List-leftUnit : {A : Set} → (list : List A) → ([] ++ list) ≡ list
-List-leftUnit _ = refl
--- List-leftUnit [] = refl
--- List-leftUnit (x :: xs) = cong (λ tail → x :: tail) (List-leftUnit xs)
-
-List-assoc : {A : Set} → (a b c : List A) → (a ++ b) ++ c ≡ a ++ (b ++ c)
-List-assoc [] _ _ = refl
-List-assoc (x :: a) b c = cong (λ tail → x :: tail) (List-assoc a b c)
-
 List-isMonoid : {A : Set} → Monoid (List A) _++_ []
-List-isMonoid = record
-  {
-    assoc = List-assoc;
-    leftUnit = List-leftUnit;
-    rightUnit = List-rightUnit
-  }
+List-isMonoid = ?
