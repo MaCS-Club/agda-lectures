@@ -78,9 +78,16 @@ sym refl = refl
 ```
 
 ## Свойства равенства термов - 3  
-
+```agda
 trans : {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
 trans = ?
+```
+
+## Свойства равенства термов - 4
+```agda
+trans : {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
+trans refl refl = refl
+```
 
 ## Записи - 1
 Создать запись можно используя ключевое слово `record`:
