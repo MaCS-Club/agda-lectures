@@ -78,7 +78,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="https://macs-club.github.io/agda-lectures/css/theme/black.css" id="theme">
+  <link rel="stylesheet" href="https://macs-club.github.io/agda-lectures/css/theme/custom-black.css" id="theme">
   <!-- Printing and PDF exports -->
   <script>
     var link = document.createElement( 'link' );
@@ -101,36 +101,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <p class="date">August ?? 2018</p>
 </section>
 
-<section id="модули" class="slide level2">
-<h2>Модули</h2>
-</section>
-<section id="section" class="slide level2">
+<section><section id="модули" class="title-slide slide level1"><h1>Модули</h1></section><section id="section" class="slide level2">
 <h2></h2>
 <p>В <em>agda</em> импортировать код из другого модуля можно:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">import</span> M</a></code></pre></div>
 <p>После этого можно использовать определённые в <code>M</code> сущности через <code>M.</code>, например <code>M.f</code> для того, чтобы вызвать функцию <code>f</code> из модуля <code>M</code></p>
-</section>
-<section id="модули---2" class="slide level2">
+</section><section id="модули---2" class="slide level2">
 <h2>Модули - 2</h2>
 <p>Для того, чтобы использовать сущности без явного указания названия модуля:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">open</span> <span class="kw">import</span> M</a></code></pre></div>
 <p>или</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">import</span> M</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">open</span> M</a></code></pre></div>
-</section>
-<section id="модули---3" class="slide level2">
+</section><section id="модули---3" class="slide level2">
 <h2>Модули - 3</h2>
 <p>Для импортируемых модулей можно задавать алиасы, указывать какие сущности импортировать, а какие наоборот скрывать. У модулей так же могут быть явные и не явные параметры.</p>
 <p>Обо всём об этом можно почитать, например, на <a href="http://wiki.portal.chalmers.se/agda/pmwiki.php?n=ReferenceManual.Modules">Agda wiki</a></p>
-</section>
-<section id="удобный-синтаксис-для-доказательства-равенств" class="slide level2">
-<h2>Удобный синтаксис для доказательства равенств</h2>
-</section>
-<section id="section-1" class="slide level2">
+</section></section>
+<section><section id="удобный-синтаксис-для-доказательств-равенств" class="title-slide slide level1"><h1>Удобный синтаксис для доказательств равенств</h1></section><section id="section-1" class="slide level2">
 <h2></h2>
 <p>Для того, чтобы было проще доказывать равенства термов мы можем ввести дополнительные функции позволяющие писать в более удобном синтаксисе:</p>
-</section>
-<section id="section-2" class="slide level2">
+</section><section id="section-2" class="slide level2">
 <h2></h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">infix</span>  <span class="dv">3</span> <span class="ot">_</span>∎</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">infixr</span> <span class="dv">2</span> <span class="ot">_</span>≡⟨⟩<span class="ot">_</span> <span class="ot">_</span>≡⟨<span class="ot">_</span>⟩<span class="ot">_</span></a>
@@ -146,11 +137,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb5-9" data-line-number="9"></a>
 <a class="sourceLine" id="cb5-10" data-line-number="10"><span class="ot">_</span>∎ <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">(</span>x <span class="ot">:</span> A<span class="ot">)</span> <span class="ot">→</span> x ≡ x</a>
 <a class="sourceLine" id="cb5-11" data-line-number="11"><span class="ot">_</span>∎ <span class="ot">_</span> <span class="ot">=</span> refl</a></code></pre></div>
-</section>
-<section id="коммутативность-сложения" class="slide level2">
-<h2>Коммутативность сложения</h2>
-</section>
-<section id="section-3" class="slide level2">
+</section></section>
+<section><section id="коммутативность-сложения" class="title-slide slide level1"><h1>Коммутативность сложения</h1></section><section id="section-3" class="slide level2">
 <h2></h2>
 <p>Для примера возьмём доказательство коммутативности сложения</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb6-1" data-line-number="1">+-suc <span class="ot">:</span> <span class="ot">∀</span> m n <span class="ot">→</span> <span class="ot">(</span>suc m + n<span class="ot">)</span> ≡ <span class="ot">(</span>m + suc n<span class="ot">)</span></a>
@@ -159,8 +147,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb7"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb7-1" data-line-number="1">+-comm <span class="ot">:</span> <span class="ot">∀</span> a b <span class="ot">→</span> a + b ≡ b + a</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2">+-comm zero b <span class="ot">=</span> sym<span class="ot">(</span>+-rightUnit b<span class="ot">)</span></a>
 <a class="sourceLine" id="cb7-3" data-line-number="3">+-comm <span class="ot">(</span>suc a<span class="ot">)</span> b <span class="ot">=</span> trans <span class="ot">(</span>cong suc <span class="ot">(</span>+-comm a b<span class="ot">))</span> <span class="ot">(</span>+-suc b a<span class="ot">)</span></a></code></pre></div>
-</section>
-<section id="section-4" class="slide level2">
+</section><section id="section-4" class="slide level2">
 <h2></h2>
 <p>И перепишем с использованием нового синтаксиса</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb8-1" data-line-number="1">+-suc <span class="ot">:</span> <span class="ot">∀</span> m n <span class="ot">→</span> <span class="ot">(</span>suc m + n<span class="ot">)</span> ≡ <span class="ot">(</span>m + suc n<span class="ot">)</span></a>
@@ -174,7 +161,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb9-6" data-line-number="6">    suc <span class="ot">(</span>b + a<span class="ot">)</span> ≡⟨⟩</a>
 <a class="sourceLine" id="cb9-7" data-line-number="7">    suc b + a   ≡⟨ +-suc b a ⟩</a>
 <a class="sourceLine" id="cb9-8" data-line-number="8">    b + suc a   ∎</a></code></pre></div>
-</section>
+</section></section>
     </div>
   </div>
 
