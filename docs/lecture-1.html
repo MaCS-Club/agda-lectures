@@ -101,97 +101,78 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <p class="date">February 25 2018</p>
 </section>
 
-<section id="соответствие-карри-говарда" class="slide level2">
-<h2>Соответствие Карри-Говарда</h2>
-<p>Соответствие Карри-Говарда устанавливает соответствие между типизированным лямбда исчислением и интуиционистской логикой.</p>
-</section>
-<section id="section" class="slide level2">
+<section><section id="соответствие-карри-говарда" class="title-slide slide level1"><h1>Соответствие Карри-Говарда</h1></section><section id="section" class="slide level2">
 <h2></h2>
 <p>Типы соответствуют высказываниям. Если мы построим значение определённого типа, то мы так же докажем высказываение соответствующее этому типу.</p>
 <p>Поскольку типы являются высказываниям, а значения являются доказательствами, конструкторы для типа соответствуют правилам вывода для соответствующего предположения.</p>
-</section>
-<section id="section-1" class="slide level2">
+</section><section id="section-1" class="slide level2">
 <h2></h2>
 <p>Для примера закодируем чётные натуральные числа:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">data</span> <span class="ot">_</span>even <span class="ot">:</span> ℕ <span class="ot">→</span> <span class="dt">Set</span> <span class="kw">where</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">    ZERO <span class="ot">:</span> zero even</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">    STEP <span class="ot">:</span> <span class="ot">(</span>x <span class="ot">:</span> ℕ<span class="ot">)</span> <span class="ot">→</span> x even <span class="ot">→</span> suc <span class="ot">(</span>suc x<span class="ot">)</span> even</a>
 <a class="sourceLine" id="cb1-4" data-line-number="4">    <span class="co">--вместо (x : ℕ) можно использовать ∀ x</span></a></code></pre></div>
-</section>
-<section id="section-2" class="slide level2">
+</section><section id="section-2" class="slide level2">
 <h2></h2>
 <p>Теперь докажем, что четвёрка является чётным числом. Нам нужно доказать обитаемость типа <code>suc (suc (suc (suc zero))) even</code>, для этого воспользуемся помощью agda-mode, напишем:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb2-1" data-line-number="1">proof₁ <span class="ot">:</span> suc <span class="ot">(</span>suc <span class="ot">(</span>suc <span class="ot">(</span>suc zero<span class="ot">)))</span> even</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">proof₁ <span class="ot">=</span> ?</a></code></pre></div>
-</section>
-<section id="section-3" class="slide level2">
+</section><section id="section-3" class="slide level2">
 <h2></h2>
 <p>Используя agda-mode выполним команду <code>load</code>, которая “загрузит” наш файл, после чего вопросик заменится на так называемую <em>дырку</em>:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb3-1" data-line-number="1">proof₁ <span class="ot">:</span> suc <span class="ot">(</span>suc <span class="ot">(</span>suc <span class="ot">(</span>suc zero<span class="ot">)))</span> even</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">proof₁ <span class="ot">=</span> <span class="ot">{!   !}</span></a></code></pre></div>
-</section>
-<section id="section-4" class="slide level2">
+</section><section id="section-4" class="slide level2">
 <h2></h2>
 <p>После этого выполним команду <code>auto</code>, которая автоматически подберёт нужный терм:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb4-1" data-line-number="1">proof₁ <span class="ot">:</span> suc <span class="ot">(</span>suc <span class="ot">(</span>suc <span class="ot">(</span>suc zero<span class="ot">)))</span> even</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">proof₁ <span class="ot">=</span> STEP <span class="ot">(</span>suc <span class="ot">(</span>suc zero<span class="ot">))</span> <span class="ot">(</span>STEP zero ZERO<span class="ot">)</span></a></code></pre></div>
-</section>
-<section id="читайте-документацию" class="slide level2">
+</section><section id="читайте-документацию" class="slide level2">
 <h2>Читайте документацию</h2>
 <p>В agda-mode есть ещё множество полезных команд помогающих интерактивно работать с кодом на Agda, все их можно посмотреть в документации на официальном сайте.</p>
-</section>
-<section id="имплиситы" class="slide level2">
-<h2>Имплиситы</h2>
-</section>
-<section id="section-5" class="slide level2">
+</section></section>
+<section><section id="имплиситы" class="title-slide slide level1"><h1>Имплиситы</h1></section><section id="section-5" class="slide level2">
 <h2></h2>
 <p>В нашем доказательстве мы явно передавали числа в функцию <code>STEP</code>, но мы можем использовать <code>_</code>, чтобы доверить Agda вывести значение в нужной позиции с помощью проверки типов.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb5-1" data-line-number="1">proof₁ <span class="ot">:</span> suc <span class="ot">(</span>suc <span class="ot">(</span>suc <span class="ot">(</span>suc zero<span class="ot">)))</span> even</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">proof₁ <span class="ot">=</span> STEP <span class="ot">_</span> <span class="ot">(</span>STEP <span class="ot">_</span> ZERO<span class="ot">)</span></a></code></pre></div>
-</section>
-<section id="section-6" class="slide level2">
+</section><section id="section-6" class="slide level2">
 <h2></h2>
 <p>Мы так же можем использовать неявные параметры во время определения типа:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">data</span> <span class="ot">_</span>even <span class="ot">:</span> ℕ <span class="ot">→</span> <span class="dt">Set</span> <span class="kw">where</span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">   ZERO <span class="ot">:</span> zero even</a>
 <a class="sourceLine" id="cb6-3" data-line-number="3">   STEP <span class="ot">:</span> <span class="ot">{</span> x <span class="ot">:</span> ℕ <span class="ot">}</span> <span class="ot">→</span> x even <span class="ot">→</span> suc <span class="ot">(</span>suc x<span class="ot">)</span> even    </a>
 <a class="sourceLine" id="cb6-4" data-line-number="4">   <span class="co">-- вместо { x : ℕ } можно использовать ∀ {x}</span></a></code></pre></div>
-</section>
-<section id="section-7" class="slide level2">
+</section><section id="section-7" class="slide level2">
 <h2></h2>
 <p>Тогда можно переписать наше доказательство:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb7-1" data-line-number="1">proof₁ <span class="ot">:</span> suc <span class="ot">(</span>suc <span class="ot">(</span>suc <span class="ot">(</span>suc zero<span class="ot">)))</span> even</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2">proof₁ <span class="ot">=</span> STEP <span class="ot">(</span>STEP ZERO<span class="ot">)</span></a></code></pre></div>
-</section>
-<section id="section-8" class="slide level2">
+</section><section id="section-8" class="slide level2">
 <h2></h2>
 <p>Неявные параметры можно передать явно используя фигурные скобки:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb8-1" data-line-number="1">proof₁ <span class="ot">:</span> suc <span class="ot">(</span>suc <span class="ot">(</span>suc <span class="ot">(</span>suc zero<span class="ot">)))</span> even</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2">proof₁ <span class="ot">=</span> STEP <span class="ot">{</span>suc <span class="ot">(</span>suc zero<span class="ot">)}</span> <span class="ot">(</span>STEP <span class="ot">{</span>zero<span class="ot">}</span> ZERO<span class="ot">)</span></a></code></pre></div>
-</section>
-<section id="импликация" class="slide level2">
+</section></section>
+<section><section id="логические-операции" class="title-slide slide level1"><h1>Логические операции</h1></section><section id="импликация" class="slide level2">
 <h2>Импликация</h2>
 <p>Импликации ⇒ в Agda соответствует функциональный тип →</p>
-</section>
-<section id="section-9" class="slide level2">
+</section><section id="section-9" class="slide level2">
 <h2></h2>
 <p>Пример доказательства, которое можно прочитать как “из существования ℕ следует существование ℕ”:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb9-1" data-line-number="1">proof₂ <span class="ot">:</span> ℕ <span class="ot">→</span> ℕ</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2">proof₂ ν <span class="ot">=</span> ν      <span class="co">-- type \nu for ν.</span></a></code></pre></div>
-</section>
-<section id="квантор-всеобщности" class="slide level2">
+</section><section id="квантор-всеобщности" class="slide level2">
 <h2>Квантор всеобщности</h2>
 <p>Мы можем обобщить предыдущий пример на произвольное множество A используя квантор всеообщности:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb10-1" data-line-number="1">proof₂′ <span class="ot">:</span> <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">→</span> A <span class="ot">→</span> A</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2">proof₂′ <span class="ot">_</span> x <span class="ot">=</span> x</a></code></pre></div>
-</section>
-<section id="конъюнкция" class="slide level2">
+</section><section id="конъюнкция" class="slide level2">
 <h2>Конъюнкция</h2>
 <p>Конъюнкции соответствует тип пары(тип произведения):</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">data</span> <span class="ot">_</span>∧<span class="ot">_</span> <span class="ot">(</span>P <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">(</span>Q <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
 <a class="sourceLine" id="cb11-2" data-line-number="2">    pair <span class="ot">:</span> P <span class="ot">→</span> Q <span class="ot">→</span> <span class="ot">(</span>P ∧ Q<span class="ot">)</span></a></code></pre></div>
-</section>
-<section id="section-10" class="slide level2">
+</section><section id="section-10" class="slide level2">
 <h2></h2>
 <p>Теперь докажем, что P ∧ Q ⇒ P и P ∧ Q ⇒ Q</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb12-1" data-line-number="1">proof₃ <span class="ot">:</span> <span class="ot">{</span>P Q <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">→</span> <span class="ot">(</span>P ∧ Q<span class="ot">)</span> <span class="ot">→</span> P</a>
@@ -199,23 +180,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb12-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb12-4" data-line-number="4">proof₄ <span class="ot">:</span> <span class="ot">{</span>P Q <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">→</span> <span class="ot">(</span>P ∧ Q<span class="ot">)</span> <span class="ot">→</span> Q</a>
 <a class="sourceLine" id="cb12-5" data-line-number="5">proof₄  <span class="ot">(</span>pair p q<span class="ot">)</span> <span class="ot">=</span> q</a></code></pre></div>
-</section>
-<section id="эквивалентность" class="slide level2">
+</section><section id="эквивалентность" class="slide level2">
 <h2>Эквивалентность</h2>
 <p>Введём эквивалентность как существование импликации в обе стороны:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="ot">_</span>⇔<span class="ot">_</span> <span class="ot">:</span> <span class="ot">(</span>P <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">→</span> <span class="ot">(</span>Q <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">→</span> <span class="dt">Set</span></a>
 <a class="sourceLine" id="cb13-2" data-line-number="2">a ⇔ b <span class="ot">=</span> <span class="ot">(</span>a <span class="ot">→</span> b<span class="ot">)</span> ∧ <span class="ot">(</span>b <span class="ot">→</span> a<span class="ot">)</span></a></code></pre></div>
 <p>Теперь можно доказать пару интересных утверждений:</p>
-</section>
-<section id="коммутативность-конъюнкции" class="slide level2">
+</section><section id="коммутативность-конъюнкции" class="slide level2">
 <h2>Коммутативность конъюнкции</h2>
 <div class="sourceCode" id="cb14"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb14-1" data-line-number="1">∧-comm′ <span class="ot">:</span> <span class="ot">{</span>P Q <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">→</span> <span class="ot">(</span>P ∧ Q<span class="ot">)</span> <span class="ot">→</span> <span class="ot">(</span>Q ∧ P<span class="ot">)</span></a>
 <a class="sourceLine" id="cb14-2" data-line-number="2">∧-comm′ <span class="ot">(</span>pair p q<span class="ot">)</span> <span class="ot">=</span> pair q p</a>
 <a class="sourceLine" id="cb14-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb14-4" data-line-number="4">∧-comm <span class="ot">:</span> <span class="ot">{</span>P Q <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">→</span> <span class="ot">(</span>P ∧ Q<span class="ot">)</span> ⇔ <span class="ot">(</span>Q ∧ P<span class="ot">)</span></a>
 <a class="sourceLine" id="cb14-5" data-line-number="5">∧-comm <span class="ot">=</span> pair ∧-comm′ ∧-comm′</a></code></pre></div>
-</section>
-<section id="ассоциативность-конъюнкции" class="slide level2">
+</section><section id="ассоциативность-конъюнкции" class="slide level2">
 <h2>Ассоциативность конъюнкции</h2>
 <div class="sourceCode" id="cb15"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb15-1" data-line-number="1">∧-assoc₁ <span class="ot">:</span> <span class="ot">{</span> P Q R <span class="ot">:</span> <span class="dt">Set</span> <span class="ot">}</span> <span class="ot">→</span> <span class="ot">((</span>P ∧ Q<span class="ot">)</span> ∧ R<span class="ot">)</span> <span class="ot">→</span> <span class="ot">(</span>P ∧ <span class="ot">(</span>Q ∧ R<span class="ot">))</span></a>
 <a class="sourceLine" id="cb15-2" data-line-number="2">∧-assoc₁ <span class="ot">(</span>pair <span class="ot">(</span>pair p q<span class="ot">)</span> r<span class="ot">)</span> <span class="ot">=</span> pair p <span class="ot">(</span>pair q r<span class="ot">)</span></a>
@@ -225,21 +203,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb15-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb15-7" data-line-number="7">∧-assoc <span class="ot">:</span> <span class="ot">{</span> P Q R <span class="ot">:</span> <span class="dt">Set</span> <span class="ot">}</span> <span class="ot">→</span> <span class="ot">((</span>P ∧ Q<span class="ot">)</span> ∧ R<span class="ot">)</span> ⇔  <span class="ot">(</span>P ∧ <span class="ot">(</span>Q ∧ R<span class="ot">))</span></a>
 <a class="sourceLine" id="cb15-8" data-line-number="8">∧-assoc <span class="ot">=</span> pair ∧-assoc₁ ∧-assoc₂</a></code></pre></div>
-</section>
-<section id="дизъюнкция" class="slide level2">
+</section><section id="дизъюнкция" class="slide level2">
 <h2>Дизъюнкция</h2>
 <p>Дизъюнкции соответствует тип суммы:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">data</span> <span class="ot">_</span>∨<span class="ot">_</span> <span class="ot">(</span>P Q <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
 <a class="sourceLine" id="cb16-2" data-line-number="2">   Left <span class="ot">:</span> P <span class="ot">→</span> P ∨ Q</a>
 <a class="sourceLine" id="cb16-3" data-line-number="3">   Right <span class="ot">:</span> Q <span class="ot">→</span> P ∨ Q</a></code></pre></div>
-</section>
-<section id="удаление-дизъюнкции" class="slide level2">
+</section><section id="удаление-дизъюнкции" class="slide level2">
 <h2>Удаление дизъюнкции</h2>
 <div class="sourceCode" id="cb17"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb17-1" data-line-number="1">∨-elim <span class="ot">:</span> <span class="ot">{</span>A B C <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">→</span> <span class="ot">(</span>A <span class="ot">→</span> C<span class="ot">)</span> <span class="ot">→</span> <span class="ot">(</span>B <span class="ot">→</span> C<span class="ot">)</span> <span class="ot">→</span> <span class="ot">(</span>A ∨ B<span class="ot">)</span> <span class="ot">→</span> C</a>
 <a class="sourceLine" id="cb17-2" data-line-number="2">∨-elim ac bc <span class="ot">(</span>Left a<span class="ot">)</span> <span class="ot">=</span> ac a</a>
 <a class="sourceLine" id="cb17-3" data-line-number="3">∨-elim ac bc <span class="ot">(</span>Right b<span class="ot">)</span> <span class="ot">=</span> bc b</a></code></pre></div>
-</section>
-<section id="коммутативность-дизъюнкции" class="slide level2">
+</section><section id="коммутативность-дизъюнкции" class="slide level2">
 <h2>Коммутативность дизъюнкции</h2>
 <div class="sourceCode" id="cb18"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb18-1" data-line-number="1">∨-comm′ <span class="ot">:</span> <span class="ot">{</span>P Q <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">→</span> <span class="ot">(</span>P ∨ Q<span class="ot">)</span> <span class="ot">→</span> <span class="ot">(</span>Q ∨ P<span class="ot">)</span></a>
 <a class="sourceLine" id="cb18-2" data-line-number="2">∨-comm′ <span class="ot">(</span>Left p<span class="ot">)</span> <span class="ot">=</span> Right p</a>
@@ -247,15 +222,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb18-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb18-5" data-line-number="5">∨-comm <span class="ot">:</span> <span class="ot">{</span>P Q <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">→</span> <span class="ot">(</span>P ∨ Q<span class="ot">)</span> ⇔ <span class="ot">(</span>Q ∨ P<span class="ot">)</span></a>
 <a class="sourceLine" id="cb18-6" data-line-number="6">∨-comm <span class="ot">=</span> pair ∨-comm′ ∨-comm′</a></code></pre></div>
-</section>
-<section id="отрицание" class="slide level2">
+</section><section id="отрицание" class="slide level2">
 <h2>Отрицание</h2>
 <p>Определим пустое множество как тип без конструкторов и отрицание как функцию переводящую любое множество в пустое:</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">data</span> ⊥ <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
 <a class="sourceLine" id="cb19-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb19-3" data-line-number="3">¬ <span class="ot">:</span> <span class="dt">Set</span> <span class="ot">→</span> <span class="dt">Set</span> <span class="co">-- for ¬ type \neg</span></a>
 <a class="sourceLine" id="cb19-4" data-line-number="4">¬ A <span class="ot">=</span> A <span class="ot">→</span> ⊥</a></code></pre></div>
-</section>
+</section></section>
     </div>
   </div>
 
