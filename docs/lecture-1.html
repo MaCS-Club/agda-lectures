@@ -104,25 +104,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section><section id="соответствие-карри-говарда" class="title-slide slide level1"><h1>Соответствие Карри-Говарда</h1></section><section id="section" class="slide level2">
 <h2></h2>
 <p>Типы соответствуют высказываниям. Если мы построим значение определённого типа, то мы так же докажем высказываение соответствующее этому типу.</p>
-<p>Поскольку типы являются высказываниям, а значения являются доказательствами, конструкторы для типа соответствуют правилам вывода для соответствующего предположения.</p>
 </section><section id="section-1" class="slide level2">
+<h2></h2>
+<p>Поскольку типы являются высказываниям, а значения являются доказательствами, конструкторы для типа соответствуют правилам вывода для соответствующего предположения.</p>
+</section><section id="section-2" class="slide level2">
 <h2></h2>
 <p>Для примера закодируем чётные натуральные числа:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">data</span> <span class="ot">_</span>even <span class="ot">:</span> ℕ <span class="ot">→</span> <span class="dt">Set</span> <span class="kw">where</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">    ZERO <span class="ot">:</span> zero even</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">    STEP <span class="ot">:</span> <span class="ot">(</span>x <span class="ot">:</span> ℕ<span class="ot">)</span> <span class="ot">→</span> x even <span class="ot">→</span> suc <span class="ot">(</span>suc x<span class="ot">)</span> even</a>
 <a class="sourceLine" id="cb1-4" data-line-number="4">    <span class="co">--вместо (x : ℕ) можно использовать ∀ x</span></a></code></pre></div>
-</section><section id="section-2" class="slide level2">
+</section><section id="section-3" class="slide level2">
 <h2></h2>
 <p>Теперь докажем, что четвёрка является чётным числом. Нам нужно доказать обитаемость типа <code>suc (suc (suc (suc zero))) even</code>, для этого воспользуемся помощью agda-mode, напишем:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb2-1" data-line-number="1">proof₁ <span class="ot">:</span> suc <span class="ot">(</span>suc <span class="ot">(</span>suc <span class="ot">(</span>suc zero<span class="ot">)))</span> even</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">proof₁ <span class="ot">=</span> ?</a></code></pre></div>
-</section><section id="section-3" class="slide level2">
+</section><section id="section-4" class="slide level2">
 <h2></h2>
 <p>Используя agda-mode выполним команду <code>load</code>, которая “загрузит” наш файл, после чего вопросик заменится на так называемую <em>дырку</em>:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb3-1" data-line-number="1">proof₁ <span class="ot">:</span> suc <span class="ot">(</span>suc <span class="ot">(</span>suc <span class="ot">(</span>suc zero<span class="ot">)))</span> even</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">proof₁ <span class="ot">=</span> <span class="ot">{!   !}</span></a></code></pre></div>
-</section><section id="section-4" class="slide level2">
+</section><section id="section-5" class="slide level2">
 <h2></h2>
 <p>После этого выполним команду <code>auto</code>, которая автоматически подберёт нужный терм:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb4-1" data-line-number="1">proof₁ <span class="ot">:</span> suc <span class="ot">(</span>suc <span class="ot">(</span>suc <span class="ot">(</span>suc zero<span class="ot">)))</span> even</a>
@@ -131,24 +133,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2>Читайте документацию</h2>
 <p>В agda-mode есть ещё множество полезных команд помогающих интерактивно работать с кодом на Agda, все их можно посмотреть в документации на официальном сайте.</p>
 </section></section>
-<section><section id="имплиситы" class="title-slide slide level1"><h1>Имплиситы</h1></section><section id="section-5" class="slide level2">
+<section><section id="имплиситы" class="title-slide slide level1"><h1>Имплиситы</h1></section><section id="section-6" class="slide level2">
 <h2></h2>
 <p>В нашем доказательстве мы явно передавали числа в функцию <code>STEP</code>, но мы можем использовать <code>_</code>, чтобы доверить Agda вывести значение в нужной позиции с помощью проверки типов.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb5-1" data-line-number="1">proof₁ <span class="ot">:</span> suc <span class="ot">(</span>suc <span class="ot">(</span>suc <span class="ot">(</span>suc zero<span class="ot">)))</span> even</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">proof₁ <span class="ot">=</span> STEP <span class="ot">_</span> <span class="ot">(</span>STEP <span class="ot">_</span> ZERO<span class="ot">)</span></a></code></pre></div>
-</section><section id="section-6" class="slide level2">
+</section><section id="section-7" class="slide level2">
 <h2></h2>
 <p>Мы так же можем использовать неявные параметры во время определения типа:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">data</span> <span class="ot">_</span>even <span class="ot">:</span> ℕ <span class="ot">→</span> <span class="dt">Set</span> <span class="kw">where</span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">   ZERO <span class="ot">:</span> zero even</a>
 <a class="sourceLine" id="cb6-3" data-line-number="3">   STEP <span class="ot">:</span> <span class="ot">{</span> x <span class="ot">:</span> ℕ <span class="ot">}</span> <span class="ot">→</span> x even <span class="ot">→</span> suc <span class="ot">(</span>suc x<span class="ot">)</span> even    </a>
 <a class="sourceLine" id="cb6-4" data-line-number="4">   <span class="co">-- вместо { x : ℕ } можно использовать ∀ {x}</span></a></code></pre></div>
-</section><section id="section-7" class="slide level2">
+</section><section id="section-8" class="slide level2">
 <h2></h2>
 <p>Тогда можно переписать наше доказательство:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb7-1" data-line-number="1">proof₁ <span class="ot">:</span> suc <span class="ot">(</span>suc <span class="ot">(</span>suc <span class="ot">(</span>suc zero<span class="ot">)))</span> even</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2">proof₁ <span class="ot">=</span> STEP <span class="ot">(</span>STEP ZERO<span class="ot">)</span></a></code></pre></div>
-</section><section id="section-8" class="slide level2">
+</section><section id="section-9" class="slide level2">
 <h2></h2>
 <p>Неявные параметры можно передать явно используя фигурные скобки:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb8-1" data-line-number="1">proof₁ <span class="ot">:</span> suc <span class="ot">(</span>suc <span class="ot">(</span>suc <span class="ot">(</span>suc zero<span class="ot">)))</span> even</a>
@@ -157,7 +159,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section><section id="логические-операции" class="title-slide slide level1"><h1>Логические операции</h1></section><section id="импликация" class="slide level2">
 <h2>Импликация</h2>
 <p>Импликации ⇒ в Agda соответствует функциональный тип →</p>
-</section><section id="section-9" class="slide level2">
+</section><section id="section-10" class="slide level2">
 <h2></h2>
 <p>Пример доказательства, которое можно прочитать как “из существования ℕ следует существование ℕ”:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb9-1" data-line-number="1">proof₂ <span class="ot">:</span> ℕ <span class="ot">→</span> ℕ</a>
@@ -172,7 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Конъюнкции соответствует тип пары(тип произведения):</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">data</span> <span class="ot">_</span>∧<span class="ot">_</span> <span class="ot">(</span>P <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">(</span>Q <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
 <a class="sourceLine" id="cb11-2" data-line-number="2">    pair <span class="ot">:</span> P <span class="ot">→</span> Q <span class="ot">→</span> <span class="ot">(</span>P ∧ Q<span class="ot">)</span></a></code></pre></div>
-</section><section id="section-10" class="slide level2">
+</section><section id="section-11" class="slide level2">
 <h2></h2>
 <p>Теперь докажем, что P ∧ Q ⇒ P и P ∧ Q ⇒ Q</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb12-1" data-line-number="1">proof₃ <span class="ot">:</span> <span class="ot">{</span>P Q <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">→</span> <span class="ot">(</span>P ∧ Q<span class="ot">)</span> <span class="ot">→</span> P</a>

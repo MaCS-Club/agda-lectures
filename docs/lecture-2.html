@@ -207,6 +207,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb11"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">data</span> List<span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
 <a class="sourceLine" id="cb11-2" data-line-number="2">[] <span class="ot">:</span> List A</a>
 <a class="sourceLine" id="cb11-3" data-line-number="3"><span class="ot">_</span>::<span class="ot">_</span> <span class="ot">:</span> A <span class="ot">→</span> List A <span class="ot">→</span> List A</a></code></pre></div>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
 <p>Мы можем определить список длинны <em>n</em> так:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">data</span> Vec<span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> ℕ <span class="ot">→</span> <span class="dt">Set</span> <span class="kw">where</span></a>
 <a class="sourceLine" id="cb12-2" data-line-number="2">  [] <span class="ot">:</span> Vec A <span class="dv">0</span></a>
@@ -261,6 +264,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="обобщение-проблемы-1" class="slide level2">
 <h2>Обобщение проблемы</h2>
 <p>Предыдущая проблема является частным случаем более общей проблемы: ошибка <em>выхода за границы</em>. Используя Векторы мы можем решить эту проблему в более общем случае.</p>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
 <p>Мы хотим реализовать функцию:</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="ot">_</span>!<span class="ot">_</span> <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>A n<span class="ot">}</span> <span class="ot">→</span> Vec A n <span class="ot">→</span> ℕ&lt; n <span class="ot">→</span> A</a></code></pre></div>
 <p>Как можно определить ℕ&lt;?</p>
@@ -274,35 +280,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Что такое число меньшее n? Можем ли мы дать индуктивное определение?</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">data</span> ℕ&lt; <span class="ot">:</span> ℕ <span class="ot">→</span> <span class="dt">Set</span> <span class="kw">where</span></a>
 <a class="sourceLine" id="cb20-2" data-line-number="2">  zero <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>n<span class="ot">}</span> <span class="ot">→</span> ℕ&lt; <span class="ot">(</span><span class="dv">1</span> + n<span class="ot">)</span></a>
-<a class="sourceLine" id="cb20-3" data-line-number="3">  1+ <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>n<span class="ot">}</span> <span class="ot">→</span> ℕ&lt; n <span class="ot">→</span> ℕ&lt; <span class="ot">(</span><span class="dv">1</span> + n<span class="ot">)</span></a>
-<a class="sourceLine" id="cb20-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb20-5" data-line-number="5">three <span class="ot">:</span> ℕ&lt; <span class="dv">7</span></a>
-<a class="sourceLine" id="cb20-6" data-line-number="6">three <span class="ot">=</span> 1+ <span class="ot">(</span>1+ <span class="ot">(</span>1+ zero<span class="ot">))</span></a>
-<a class="sourceLine" id="cb20-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb20-8" data-line-number="8">three&#39; <span class="ot">:</span> ℕ&lt; <span class="dv">10</span></a>
-<a class="sourceLine" id="cb20-9" data-line-number="9">three&#39; <span class="ot">=</span> 1+ <span class="ot">(</span>1+ <span class="ot">(</span>1+ zero<span class="ot">))</span></a></code></pre></div>
+<a class="sourceLine" id="cb20-3" data-line-number="3">  1+ <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>n<span class="ot">}</span> <span class="ot">→</span> ℕ&lt; n <span class="ot">→</span> ℕ&lt; <span class="ot">(</span><span class="dv">1</span> + n<span class="ot">)</span></a></code></pre></div>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<div class="sourceCode" id="cb21"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb21-1" data-line-number="1">three <span class="ot">:</span> ℕ&lt; <span class="dv">7</span></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">three <span class="ot">=</span> 1+ <span class="ot">(</span>1+ <span class="ot">(</span>1+ zero<span class="ot">))</span></a>
+<a class="sourceLine" id="cb21-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb21-4" data-line-number="4">three&#39; <span class="ot">:</span> ℕ&lt; <span class="dv">10</span></a>
+<a class="sourceLine" id="cb21-5" data-line-number="5">three&#39; <span class="ot">=</span> 1+ <span class="ot">(</span>1+ <span class="ot">(</span>1+ zero<span class="ot">))</span></a></code></pre></div>
 </section>
 <section id="lookup" class="slide level2">
-<h2>Lookup</h2>
-<p>Теперь мы можем определить оператор <code>_!_</code>:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="ot">_</span>!<span class="ot">_</span> <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>A n<span class="ot">}</span> <span class="ot">→</span> Vec A n <span class="ot">→</span> ℕ&lt; n <span class="ot">→</span> A</a>
-<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="ot">(</span>x :: <span class="ot">_)</span> ! zero <span class="ot">=</span> x</a>
-<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="ot">(_</span> :: xs<span class="ot">)</span> ! <span class="ot">(</span>1+ m<span class="ot">)</span> <span class="ot">=</span> xs ! m</a></code></pre></div>
-<p>Теперь мы можем отлавливать ошибку выхода за границы во время компиляции:</p>
-</section>
-<section id="lookup-1" class="slide level2">
 <h2>Lookup</h2>
 <p>Теперь мы можем определить оператор <code>_!_</code>:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="ot">_</span>!<span class="ot">_</span> <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>A n<span class="ot">}</span> <span class="ot">→</span> Vec A n <span class="ot">→</span> ℕ&lt; n <span class="ot">→</span> A</a>
 <a class="sourceLine" id="cb22-2" data-line-number="2"><span class="ot">(</span>x :: <span class="ot">_)</span> ! zero <span class="ot">=</span> x</a>
 <a class="sourceLine" id="cb22-3" data-line-number="3"><span class="ot">(_</span> :: xs<span class="ot">)</span> ! <span class="ot">(</span>1+ m<span class="ot">)</span> <span class="ot">=</span> xs ! m</a></code></pre></div>
 <p>Теперь мы можем отлавливать ошибку выхода за границы во время компиляции:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb23-1" data-line-number="1">one <span class="ot">=</span> upto3V ! <span class="ot">(</span>1+ zero<span class="ot">)</span></a>
-<a class="sourceLine" id="cb23-2" data-line-number="2">out-of-bounds <span class="ot">=</span> upto3V ! <span class="ot">(</span>1+ <span class="ot">(</span>1+ <span class="ot">(</span>1+ <span class="ot">(</span>1+ zero<span class="ot">))))</span></a></code></pre></div>
+</section>
+<section id="lookup-1" class="slide level2">
+<h2>Lookup</h2>
+<p>Теперь мы можем определить оператор <code>_!_</code>:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="ot">_</span>!<span class="ot">_</span> <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>A n<span class="ot">}</span> <span class="ot">→</span> Vec A n <span class="ot">→</span> ℕ&lt; n <span class="ot">→</span> A</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="ot">(</span>x :: <span class="ot">_)</span> ! zero <span class="ot">=</span> x</a>
+<a class="sourceLine" id="cb23-3" data-line-number="3"><span class="ot">(_</span> :: xs<span class="ot">)</span> ! <span class="ot">(</span>1+ m<span class="ot">)</span> <span class="ot">=</span> xs ! m</a></code></pre></div>
+<p>Теперь мы можем отлавливать ошибку выхода за границы во время компиляции:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb24-1" data-line-number="1">one <span class="ot">=</span> upto3V ! <span class="ot">(</span>1+ zero<span class="ot">)</span></a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">out-of-bounds <span class="ot">=</span> upto3V ! <span class="ot">(</span>1+ <span class="ot">(</span>1+ <span class="ot">(</span>1+ <span class="ot">(</span>1+ zero<span class="ot">))))</span></a></code></pre></div>
 </section>
 <section id="lookup-2" class="slide level2">
 <h2>Lookup</h2>
-<div class="sourceCode" id="cb24"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb24-1" data-line-number="1">out-of-bounds <span class="ot">=</span> upto3V ! <span class="ot">(</span>1+ <span class="ot">(</span>1+ <span class="ot">(</span>1+ <span class="ot">(</span>1+ zero<span class="ot">))))</span></a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb25-1" data-line-number="1">out-of-bounds <span class="ot">=</span> upto3V ! <span class="ot">(</span>1+ <span class="ot">(</span>1+ <span class="ot">(</span>1+ <span class="ot">(</span>1+ zero<span class="ot">))))</span></a></code></pre></div>
 <blockquote>
 <p>Type mismatch: expected: zero actual: suc _n_103 when checking that the expression 1+ (1+ (1+ (1+ zero))) has type ℕ&lt; 4</p>
 </blockquote>
