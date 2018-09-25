@@ -38,7 +38,7 @@ open import PropositionalEquality { ℕ }
 *-rightZero : ∀ n → n * 0 ≡ 0
 *-rightZero 0 = refl
 *-rightZero (suc a) = *-rightZero a
-Π
+
 *-rightUnit : ∀ n → n * 1 ≡ n
 *-rightUnit zero = refl
 *-rightUnit (suc a) = cong suc (*-rightUnit a)
@@ -60,7 +60,7 @@ open import PropositionalEquality { ℕ }
       suc m + suc m * n     ∎
 
 *-comm : ∀ a b → a * b ≡ b * a
-*-comm zero b = trans refl (sym(*-rightZero b))
+*-comm zero b = sym(*-rightZero b)
 *-comm (suc a) b = begin
       suc a * b ≡⟨ cong (b +_) (*-comm a b) ⟩
       b + b * a ≡⟨ sym (+-*-suc b a) ⟩

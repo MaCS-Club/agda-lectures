@@ -101,99 +101,87 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <p class="date">July 22 2018</p>
 </section>
 
-<section id="модули" class="slide level2">
-<h2>Модули</h2>
-</section>
-<section id="section" class="slide level2">
+<section><section id="модули" class="title-slide slide level1"><h1>Модули</h1></section><section id="section" class="slide level2">
 <h2></h2>
 <p>В <em>agda</em> импортировать код из другого модуля можно:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">import</span> M</a></code></pre></div>
 <p>После этого можно использовать определённые в <code>M</code> сущности через <code>M.</code>, например <code>M.f</code> для того, чтобы вызвать функцию <code>f</code> из модуля <code>M</code></p>
-</section>
-<section id="модули---2" class="slide level2">
-<h2>Модули - 2</h2>
+</section><section id="section-1" class="slide level2">
+<h2></h2>
 <p>Для того, чтобы использовать сущности без явного указания названия модуля:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">open</span> <span class="kw">import</span> M</a></code></pre></div>
 <p>или</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">import</span> M</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">open</span> M</a></code></pre></div>
-</section>
-<section id="модули---3" class="slide level2">
-<h2>Модули - 3</h2>
+</section><section id="section-2" class="slide level2">
+<h2></h2>
 <p>Для импортируемых модулей можно задавать алиасы, указывать какие сущности импортировать, а какие наоборот скрывать. У модулей так же могут быть явные и не явные параметры.</p>
 <p>Обо всём об этом можно почитать, например, на <a href="http://wiki.portal.chalmers.se/agda/pmwiki.php?n=ReferenceManual.Modules">Agda wiki</a></p>
-</section>
-<section id="nat" class="slide level2">
-<h2>Nat</h2>
+</section></section>
+<section><section id="nat" class="title-slide slide level1"><h1>Nat</h1></section><section id="section-3" class="slide level2">
+<h2></h2>
 <p>Вспомним определение натуральных чисел:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">data</span> ℕ <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">    zero <span class="ot">:</span> ℕ</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3">    suc <span class="ot">:</span> ℕ <span class="ot">→</span> ℕ</a>
 <a class="sourceLine" id="cb4-4" data-line-number="4"><span class="pp">{-# BUILTIN NATURAL ℕ #-}</span></a></code></pre></div>
-</section>
-<section id="nat-1" class="slide level2">
-<h2>Nat</h2>
+</section><section id="section-4" class="slide level2">
+<h2></h2>
 <p>И определение сложения:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="ot">_</span>+<span class="ot">_</span> <span class="ot">:</span> ℕ <span class="ot">→</span> ℕ <span class="ot">→</span> ℕ</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">zero  + m <span class="ot">=</span> m</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">suc n + m <span class="ot">=</span> suc <span class="ot">(</span>n + m<span class="ot">)</span></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="pp">{-# BUILTIN NATPLUS _+_ #-}</span></a></code></pre></div>
-</section>
-<section id="равенство-термов" class="slide level2">
-<h2>Равенство термов</h2>
+</section></section>
+<section><section id="равенство-термов" class="title-slide slide level1"><h1>Равенство термов</h1></section><section id="section-5" class="slide level2">
+<h2></h2>
 <p>Введём оператор равенства на термах:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">infix</span> <span class="dv">4</span> <span class="ot">_</span>≡<span class="ot">_</span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw">data</span> <span class="ot">_</span>≡<span class="ot">_</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">:</span> A <span class="ot">→</span> A <span class="ot">→</span> <span class="dt">Set</span> <span class="kw">where</span></a>
 <a class="sourceLine" id="cb6-4" data-line-number="4">  refl <span class="ot">:</span> <span class="ot">{</span> x <span class="ot">:</span> A <span class="ot">}</span> <span class="ot">→</span> x ≡ x</a></code></pre></div>
-</section>
-<section id="свойства-равенства-термов" class="slide level2">
+</section><section id="свойства-равенства-термов" class="slide level2">
 <h2>Свойства равенства термов</h2>
+</section><section id="section-6" class="slide level2">
+<h2></h2>
 <div class="sourceCode" id="cb7"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb7-1" data-line-number="1">cong <span class="ot">:</span> <span class="ot">{</span>A B <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">{</span>x y <span class="ot">:</span> A<span class="ot">}</span> <span class="ot">→</span> <span class="ot">(</span>f <span class="ot">:</span> A <span class="ot">→</span> B<span class="ot">)</span> <span class="ot">→</span> x ≡ y <span class="ot">→</span> f x ≡ f y</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2">cong <span class="ot">_</span> refl <span class="ot">=</span> refl</a></code></pre></div>
-</section>
-<section id="свойства-равенства-термов---2" class="slide level2">
-<h2>Свойства равенства термов - 2</h2>
+</section><section id="section-7" class="slide level2">
+<h2></h2>
 <div class="sourceCode" id="cb8"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb8-1" data-line-number="1">sym <span class="ot">:</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">{</span>x y <span class="ot">:</span> A<span class="ot">}</span> <span class="ot">→</span> x ≡ y <span class="ot">→</span> y ≡ x</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2">sym <span class="ot">=</span> ?</a></code></pre></div>
-</section>
-<section id="свойства-равенства-термов---3" class="slide level2">
-<h2>Свойства равенства термов - 3</h2>
+</section><section id="section-8" class="slide level2">
+<h2></h2>
 <div class="sourceCode" id="cb9"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb9-1" data-line-number="1">sym <span class="ot">:</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">{</span>x y <span class="ot">:</span> A<span class="ot">}</span> <span class="ot">→</span> x ≡ y <span class="ot">→</span> y ≡ x</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2">sym refl <span class="ot">=</span> refl</a></code></pre></div>
-</section>
-<section id="свойства-равенства-термов---3-1" class="slide level2">
-<h2>Свойства равенства термов - 3</h2>
+</section><section id="section-9" class="slide level2">
+<h2></h2>
 <div class="sourceCode" id="cb10"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb10-1" data-line-number="1">trans <span class="ot">:</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">{</span>x y z <span class="ot">:</span> A<span class="ot">}</span> <span class="ot">→</span> x ≡ y <span class="ot">→</span> y ≡ z <span class="ot">→</span> x ≡ z</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2">trans <span class="ot">=</span> ?</a></code></pre></div>
-</section>
-<section id="свойства-равенства-термов---4" class="slide level2">
-<h2>Свойства равенства термов - 4</h2>
+</section><section id="section-10" class="slide level2">
+<h2></h2>
 <div class="sourceCode" id="cb11"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb11-1" data-line-number="1">trans <span class="ot">:</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">{</span>x y z <span class="ot">:</span> A<span class="ot">}</span> <span class="ot">→</span> x ≡ y <span class="ot">→</span> y ≡ z <span class="ot">→</span> x ≡ z</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2">trans refl refl <span class="ot">=</span> refl</a></code></pre></div>
-</section>
-<section id="записи---1" class="slide level2">
-<h2>Записи - 1</h2>
+</section></section>
+<section><section id="записи" class="title-slide slide level1"><h1>Записи</h1></section><section id="section-11" class="slide level2">
+<h2></h2>
 <p>Создать запись можно используя ключевое слово <code>record</code>:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">record</span> Pair <span class="ot">(</span>A B <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
 <a class="sourceLine" id="cb12-2" data-line-number="2">  <span class="kw">field</span></a>
 <a class="sourceLine" id="cb12-3" data-line-number="3">    fst <span class="ot">:</span> A</a>
 <a class="sourceLine" id="cb12-4" data-line-number="4">    snd <span class="ot">:</span> B</a></code></pre></div>
-</section>
-<section id="записи---2" class="slide level2">
-<h2>Записи - 2</h2>
+</section><section id="section-12" class="slide level2">
+<h2></h2>
 <p>Это определяет новый тип <code>Pair : Set → Set → Set</code> и две функции проекции:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb13-1" data-line-number="1">Pair<span class="ot">.</span>fst <span class="ot">:</span> <span class="ot">{</span>A B <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">→</span> Pair A B <span class="ot">→</span> A</a>
 <a class="sourceLine" id="cb13-2" data-line-number="2">Pair<span class="ot">.</span>snd <span class="ot">:</span> <span class="ot">{</span>A B <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">→</span> Pair A B <span class="ot">→</span> B</a></code></pre></div>
-</section>
-<section id="записи---3" class="slide level2">
-<h2>Записи - 3</h2>
+</section><section id="section-13" class="slide level2">
+<h2></h2>
 <p>Создать элемент данного типа можно:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb14-1" data-line-number="1">p23 <span class="ot">:</span> Pair ℕ ℕ</a>
 <a class="sourceLine" id="cb14-2" data-line-number="2">p23 <span class="ot">=</span> <span class="kw">record</span> <span class="ot">{</span> fst <span class="ot">=</span> <span class="dv">2</span><span class="ot">;</span> snd <span class="ot">=</span> <span class="dv">3</span> <span class="ot">}</span></a></code></pre></div>
-</section>
-<section id="записи---4" class="slide level2">
-<h2>Записи - 4</h2>
+</section><section id="section-14" class="slide level2">
+<h2></h2>
 <p>Или можно ввести конструктор:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">record</span> Pair <span class="ot">(</span>A B <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
 <a class="sourceLine" id="cb15-2" data-line-number="2">  <span class="kw">constructor</span> <span class="ot">_</span>,<span class="ot">_</span></a>
@@ -203,20 +191,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb15-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb15-7" data-line-number="7">p45 <span class="ot">:</span> Pair ℕ ℕ</a>
 <a class="sourceLine" id="cb15-8" data-line-number="8">p45 <span class="ot">=</span> <span class="dv">4</span> , <span class="dv">5</span></a></code></pre></div>
-</section>
-<section id="полугруппы---1" class="slide level2">
-<h2>Полугруппы - 1</h2>
+</section></section>
+<section><section id="полугруппы" class="title-slide slide level1"><h1>Полугруппы</h1></section><section id="section-15" class="slide level2">
+<h2></h2>
 <p>С помощью записей можем, например, ввести понятие полугруппы:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">record</span> Semigroup <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">(_</span>∘<span class="ot">_</span> <span class="ot">:</span> A <span class="ot">→</span> A <span class="ot">→</span> A<span class="ot">)</span> <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
 <a class="sourceLine" id="cb16-2" data-line-number="2">  <span class="kw">field</span></a>
 <a class="sourceLine" id="cb16-3" data-line-number="3">    assoc <span class="ot">:</span> <span class="ot">(</span>a b c <span class="ot">:</span> A<span class="ot">)</span> <span class="ot">→</span> <span class="ot">(</span>a ∘ b<span class="ot">)</span> ∘ c ≡ a ∘ <span class="ot">(</span>b ∘ c<span class="ot">)</span></a></code></pre></div>
-</section>
-<section id="полугруппы---2" class="slide level2">
-<h2>Полугруппы - 2</h2>
+</section><section id="section-16" class="slide level2">
+<h2></h2>
 <p>Чтобы доказать, что какое-то множество является полугруппой нужно создать элемент типа <code>Semigroup</code> предоставив доказательство ассоциативности:</p>
-</section>
-<section id="полугруппы---3" class="slide level2">
-<h2>Полугруппы - 3</h2>
+</section><section id="section-17" class="slide level2">
+<h2></h2>
 <div class="sourceCode" id="cb17"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb17-1" data-line-number="1">+-assoc <span class="ot">:</span> <span class="ot">(</span>a b c <span class="ot">:</span> ℕ<span class="ot">)</span> <span class="ot">→</span> <span class="ot">(</span>a + b<span class="ot">)</span> + c ≡ a + <span class="ot">(</span>b + c<span class="ot">)</span></a>
 <a class="sourceLine" id="cb17-2" data-line-number="2">+-assoc zero <span class="ot">_</span> <span class="ot">_</span> <span class="ot">=</span> refl</a>
 <a class="sourceLine" id="cb17-3" data-line-number="3">+-assoc <span class="ot">(</span>suc a<span class="ot">)</span> b c <span class="ot">=</span> cong suc <span class="ot">(</span>+-assoc a b c<span class="ot">)</span></a>
@@ -226,34 +212,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb17-7" data-line-number="7">  <span class="ot">{</span></a>
 <a class="sourceLine" id="cb17-8" data-line-number="8">    assoc <span class="ot">=</span> +-assoc</a>
 <a class="sourceLine" id="cb17-9" data-line-number="9">  <span class="ot">}</span></a></code></pre></div>
-</section>
-<section id="моноиды---1" class="slide level2">
-<h2>Моноиды - 1</h2>
+</section></section>
+<section><section id="моноиды" class="title-slide slide level1"><h1>Моноиды</h1></section><section id="section-18" class="slide level2">
+<h2></h2>
 <p>Определим и понятие моноида:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">record</span> Monoid <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">(_</span>∘<span class="ot">_</span> <span class="ot">:</span> A <span class="ot">→</span> A <span class="ot">→</span> A<span class="ot">)</span> <span class="ot">(</span>id <span class="ot">:</span> A<span class="ot">):</span> <span class="dt">Set</span> <span class="kw">where</span></a>
 <a class="sourceLine" id="cb18-2" data-line-number="2">  <span class="kw">field</span></a>
 <a class="sourceLine" id="cb18-3" data-line-number="3">    leftUnit <span class="ot">:</span> <span class="ot">(</span>a <span class="ot">:</span> A<span class="ot">)</span> <span class="ot">→</span> <span class="ot">(</span>id ∘ a<span class="ot">)</span> ≡ a</a>
 <a class="sourceLine" id="cb18-4" data-line-number="4">    rightUnit <span class="ot">:</span> <span class="ot">(</span>a <span class="ot">:</span> A<span class="ot">)</span> <span class="ot">→</span> <span class="ot">(</span>a ∘ id<span class="ot">)</span> ≡ a</a>
 <a class="sourceLine" id="cb18-5" data-line-number="5">    assoc <span class="ot">:</span> <span class="ot">(</span>a b c <span class="ot">:</span> A<span class="ot">)</span> <span class="ot">→</span> <span class="ot">(</span>a ∘ b<span class="ot">)</span> ∘ c ≡ a ∘ <span class="ot">(</span>b ∘ c<span class="ot">)</span></a></code></pre></div>
-</section>
-<section id="моноиды---2" class="slide level2">
-<h2>Моноиды - 2</h2>
+</section><section id="ℕ-моноид" class="slide level2">
+<h2>ℕ моноид</h2>
 <div class="sourceCode" id="cb19"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb19-1" data-line-number="1">ℕ+-isMonoid <span class="ot">:</span> Monoid ℕ <span class="ot">_</span>+<span class="ot">_</span> zero</a>
 <a class="sourceLine" id="cb19-2" data-line-number="2">ℕ+-isMonoid <span class="ot">=</span> ?</a></code></pre></div>
-</section>
-<section id="свойства-списков" class="slide level2">
+</section><section id="свойства-списков" class="slide level2">
 <h2>Свойства списков</h2>
 <div class="sourceCode" id="cb20"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb20-1" data-line-number="1">List-isMonoid <span class="ot">:</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">→</span> Monoid <span class="ot">(</span>List A<span class="ot">)</span> <span class="ot">_</span>++<span class="ot">_</span> []</a>
 <a class="sourceLine" id="cb20-2" data-line-number="2">List-isMonoid <span class="ot">=</span> ?</a></code></pre></div>
-</section>
-<section id="удобный-синтаксис-для-доказательства-равенств" class="slide level2">
-<h2>Удобный синтаксис для доказательства равенств</h2>
-</section>
-<section id="section-1" class="slide level2">
+</section></section>
+<section><section id="удобный-синтаксис-для-доказательства-равенств" class="title-slide slide level1"><h1>Удобный синтаксис для доказательства равенств</h1></section><section id="section-19" class="slide level2">
 <h2></h2>
 <p>Для того, чтобы было проще доказывать равенства термов мы можем ввести дополнительные функции позволяющие писать в более удобном синтаксисе:</p>
-</section>
-<section id="section-2" class="slide level2">
+</section><section id="section-20" class="slide level2">
 <h2></h2>
 <div class="sourceCode" id="cb21"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">infix</span>  <span class="dv">3</span> <span class="ot">_</span>∎</a>
 <a class="sourceLine" id="cb21-2" data-line-number="2"><span class="kw">infixr</span> <span class="dv">2</span> <span class="ot">_</span>≡⟨⟩<span class="ot">_</span> <span class="ot">_</span>≡⟨<span class="ot">_</span>⟩<span class="ot">_</span></a>
@@ -269,11 +249,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb22-9" data-line-number="9"></a>
 <a class="sourceLine" id="cb22-10" data-line-number="10"><span class="ot">_</span>∎ <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">(</span>x <span class="ot">:</span> A<span class="ot">)</span> <span class="ot">→</span> x ≡ x</a>
 <a class="sourceLine" id="cb22-11" data-line-number="11"><span class="ot">_</span>∎ <span class="ot">_</span> <span class="ot">=</span> refl</a></code></pre></div>
-</section>
-<section id="коммутативность-сложения" class="slide level2">
+</section><section id="коммутативность-сложения" class="slide level2">
 <h2>Коммутативность сложения</h2>
-</section>
-<section id="section-3" class="slide level2">
+</section><section id="section-21" class="slide level2">
 <h2></h2>
 <p>Для примера возьмём доказательство коммутативности сложения</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb23-1" data-line-number="1">+-suc <span class="ot">:</span> <span class="ot">∀</span> m n <span class="ot">→</span> <span class="ot">(</span>suc m + n<span class="ot">)</span> ≡ <span class="ot">(</span>m + suc n<span class="ot">)</span></a>
@@ -282,8 +260,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb24"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb24-1" data-line-number="1">+-comm <span class="ot">:</span> <span class="ot">∀</span> a b <span class="ot">→</span> a + b ≡ b + a</a>
 <a class="sourceLine" id="cb24-2" data-line-number="2">+-comm zero b <span class="ot">=</span> sym<span class="ot">(</span>+-rightUnit b<span class="ot">)</span></a>
 <a class="sourceLine" id="cb24-3" data-line-number="3">+-comm <span class="ot">(</span>suc a<span class="ot">)</span> b <span class="ot">=</span> trans <span class="ot">(</span>cong suc <span class="ot">(</span>+-comm a b<span class="ot">))</span> <span class="ot">(</span>+-suc b a<span class="ot">)</span></a></code></pre></div>
-</section>
-<section id="section-4" class="slide level2">
+</section><section id="section-22" class="slide level2">
 <h2></h2>
 <p>И перепишем с использованием нового синтаксиса</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb25-1" data-line-number="1">+-suc <span class="ot">:</span> <span class="ot">∀</span> m n <span class="ot">→</span> <span class="ot">(</span>suc m + n<span class="ot">)</span> ≡ <span class="ot">(</span>m + suc n<span class="ot">)</span></a>
@@ -297,7 +274,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb26-6" data-line-number="6">    suc <span class="ot">(</span>b + a<span class="ot">)</span> ≡⟨⟩</a>
 <a class="sourceLine" id="cb26-7" data-line-number="7">    suc b + a   ≡⟨ +-suc b a ⟩</a>
 <a class="sourceLine" id="cb26-8" data-line-number="8">    b + suc a   ∎</a></code></pre></div>
-</section>
+</section></section>
     </div>
   </div>
 

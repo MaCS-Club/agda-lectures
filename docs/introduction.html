@@ -165,7 +165,7 @@ apm install agda-mode</code></pre>
 </section>
 <section id="миксфиксы" class="slide level2">
 <h2>Миксфиксы</h2>
-<p>Agda поддерживает т.н. миксфиксную запись т.е. подставлять аргументы можно прямо в название функции на место “дырок”. Например, метод с сигнатурой</p>
+<p>Agda поддерживает т.н. миксфиксную запись</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb6-1" data-line-number="1">if<span class="ot">_</span>then<span class="ot">_</span>else<span class="ot">_</span> <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span> a <span class="ot">}</span> <span class="ot">→</span> Bool <span class="ot">→</span> a <span class="ot">→</span> a <span class="ot">→</span> a</a></code></pre></div>
 <p>можно вызвать и как <code>if a then b else c</code>, и как <code>if_then_else_ a b c</code></p>
 </section>
@@ -179,6 +179,9 @@ apm install agda-mode</code></pre>
 <section id="итог" class="slide level2">
 <h2>Итог</h2>
 <p>Финальный листинг модуля выглядит так:</p>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
 <div class="sourceCode" id="cb8"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">module</span> Nat <span class="kw">where</span></a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw">data</span> ℕ <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
