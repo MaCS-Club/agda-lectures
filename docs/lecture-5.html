@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Igor Fedorov">
+  <title>Введение в HoTT и CubicalTT</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://macs-club.github.io/reveal.js/css/reveal.css">
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="https://macs-club.github.io/reveal.js/css/theme/custom-black.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'https://macs-club.github.io/reveal.js/css/print/pdf.css' : 'https://macs-club.github.io/reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="https://macs-club.github.io/reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Введение в HoTT и CubicalTT</h1>
+  <p class="author">Igor Fedorov</p>
+</section>
+
+<section><section id="пути-в-топологии" class="title-slide slide level1"><h1>Пути в топологии</h1></section><section id="section" class="slide level2">
+<h2></h2>
+<p>В топологическом пространстве <code>X</code> путём из <code>a</code> в <code>b</code> называется непрерывное отображение <code>f</code> из интервала <code>[0,1]</code> в <code>X</code> такое, что <code>f(0) = a</code> и <code>f(1) = b</code>.</p>
+</section><section id="section-1" class="slide level2">
+<h2></h2>
+<p>В топологическом пространстве <code>X</code> путём из <code>a</code> в <code>b</code> называется непрерывное отображение <code>f</code> из интервала <code>[0,1]</code> в <code>X</code> такое, что <code>f(0) = a</code> и <code>f(1) = b</code>.</p>
+<p>Если существует путь из <code>a</code> в <code>b</code>, то существует и путь из <code>b</code> в <code>a</code>.</p>
+</section><section id="section-2" class="slide level2">
+<h2></h2>
+<p>В топологическом пространстве <code>X</code> путём из <code>a</code> в <code>b</code> называется непрерывное отображение <code>f</code> из интервала <code>[0,1]</code> в <code>X</code> такое, что <code>f(0) = a</code> и <code>f(1) = b</code>.</p>
+<p>Если существует путь из <code>a</code> в <code>b</code>, то существует и путь из <code>b</code> в <code>a</code>.</p>
+<p>Если существует путь из <code>a</code> в <code>b</code> и из <code>b</code> в <code>c</code>, то существует их композиция т.е. путь из <code>a</code> в <code>c</code>.</p>
+</section><section id="section-3" class="slide level2">
+<h2></h2>
+<p>Непрерывное отображение <code>f : [0,1] x X → Y</code> называется гомотопией.</p>
+</section><section id="section-4" class="slide level2">
+<h2></h2>
+<p>Имея два пути <code>p</code> и <code>q</code> мы можем так же рассмотреть непрерывное отображение одного пути в другой, это будет непрерывное отображение <code>[0,1]</code> в пространство путей или, что то же самое, отображение <code>[0,1] x [0,1]</code> в исходное топологическое пространстве т.е. будет являться гомотопией.</p>
+<p>Так же мы можем рассмотреть пути в пространстве путей между путями, которые тоже будут являться гомотопиями и так далее.</p>
+</section><section id="section-5" class="slide level2">
+<h2></h2>
+<p>Любое топологическое пространство <code>X</code> является категорией, объектами которой являются точки <code>X</code>, а морфизмами являются классы путей. Поскольку любой морфизм в этой категории является изоморфизмом, эта категория является группоидом, так называемым фундаментальным группоидом <code>X</code>. Группа автоморфизмов точки <code>x</code> в <code>X</code> — это просто фундаментальная группа в <code>X</code>.</p>
+</section><section id="section-6" class="slide level2">
+<h2></h2>
+<p>Группоид в котором рассматривается бесконечная башня морфизмов между морфизмами, т.е. для любого объекта на любом уровне множество его изоморфизмов обладает структурой группоида, называется ∞-группоидом.</p>
+</section></section>
+<section><section id="identity-types-это-пути" class="title-slide slide level1"><h1>Identity types это пути</h1></section><section id="section-7" class="slide level2">
+<h2></h2>
+<p>Если рассмотреть введённый нами ранее типы <code>_≡_</code> то можно увидеть, что они ведут себя как пути в топологии!</p>
+</section><section id="section-8" class="slide level2">
+<h2></h2>
+<p>Более того, если <code>p q : x ≡ y</code> т.е. являются док-вом равенства <code>x</code> и <code>y</code>, то утверждение об их равенстве будет иметь тип <code>p ≡ q</code> и так до бесконечности т.е. имеют структуру ∞-группоида.</p>
+</section></section>
+<section><section id="cubicaltt" class="title-slide slide level1"><h1>CubicalTT</h1></section><section id="section-9" class="slide level2">
+<h2></h2>
+<p>Кубическая теория типов это расширение теории типов позволяющее напрямую работать с n-мерными кубами(точка, линия, квадрат, куб и т.д.). Она предлагает новый способ рассуждения о типах тождественности, например, в данной теории доказуема функциональная эктенсиональность и аксиома унивалентности Воеводского.</p>
+</section><section id="section-10" class="slide level2">
+<h2></h2>
+<p>На данном этапе есть экспериментальный компилятор <code>mortberg/cubicaltt</code> и в Agda с версии 2.6.0(не выпущена) ест директива <code>{-# OPTIONS --cubical #-}</code>.</p>
+</section><section id="тип-интервала" class="slide level2">
+<h2>Тип интервала</h2>
+<p>В кубической теории типов вводится тип интервала <code>I</code>, который топологически соответствует единичному интервалу. В ограниченном контексте этот тип имеет всего два значения начало <code>i0</code> и конец <code>i0</code></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb1-1" data-line-number="1">a b <span class="ot">:</span> I</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">a <span class="ot">=</span> i0</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">b <span class="ot">=</span> i1</a></code></pre></div>
+</section><section id="section-11" class="slide level2">
+<h2></h2>
+<p>Элементы интервала имеют вид алгебры де Моргана:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb2-1" data-line-number="1">max <span class="ot">=</span> i ∨ j</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">min <span class="ot">=</span> i ∧ j</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">neg <span class="ot">=</span> ~ i</a></code></pre></div>
+</section><section id="section-12" class="slide level2">
+<h2></h2>
+<p>Для типа интервала выполняются все свойства алгебры де Моргана :</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb3-1" data-line-number="1">p₁ <span class="ot">:</span> i0 ∨ i    ≡ i</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">p₂ <span class="ot">:</span> i  ∨ i1   ≡ i1</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">p₃ <span class="ot">:</span> i  ∨ j    ≡ j ∨ i</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">p₄ <span class="ot">:</span> i  ∧ j    ≡ j ∧ i</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">p₅ <span class="ot">:</span> ~ <span class="ot">(</span>~ i<span class="ot">)</span>   ≡ i</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">p₆ <span class="ot">:</span> i0        ≡ ~ i1</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">p₇ <span class="ot">:</span> ~ <span class="ot">(</span>i ∨ j<span class="ot">)</span> ≡ ~ i ∧ ~ j</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">p₈ <span class="ot">:</span> ~ <span class="ot">(</span>i ∧ j<span class="ot">)</span> ≡ ~ i ∨ ~ j</a></code></pre></div>
+</section><section id="тип-пути" class="slide level2">
+<h2>Тип пути</h2>
+<p>Зависимый тип пути(путь между путями):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb4-1" data-line-number="1">PathP <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>α<span class="ot">}</span> <span class="ot">(</span>A <span class="ot">:</span> I <span class="ot">→</span> <span class="dt">Set</span> α<span class="ot">)</span> <span class="ot">→</span> A i0 <span class="ot">→</span> A i1 <span class="ot">→</span> <span class="dt">Set</span> α</a></code></pre></div>
+</section><section id="section-13" class="slide level2">
+<h2></h2>
+<p>Не зависимый путь:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb5-1" data-line-number="1">Path <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>ℓ<span class="ot">}</span> <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span> ℓ<span class="ot">)</span> <span class="ot">→</span> A <span class="ot">→</span> A <span class="ot">→</span> <span class="dt">Set</span> ℓ</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">Path A a b <span class="ot">=</span> PathP <span class="ot">(λ</span> <span class="ot">_</span> <span class="ot">→</span> A<span class="ot">)</span> a b</a></code></pre></div>
+</section><section id="section-14" class="slide level2">
+<h2></h2>
+<p>Тип тождественности можно переписать так:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="ot">_</span>≡<span class="ot">_</span> <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>ℓ<span class="ot">}</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span> ℓ<span class="ot">}</span> <span class="ot">→</span> A <span class="ot">→</span> A <span class="ot">→</span> <span class="dt">Set</span> ℓ</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="ot">_</span>≡<span class="ot">_</span> <span class="ot">{</span>A <span class="ot">=</span> A<span class="ot">}</span> <span class="ot">=</span> PathP <span class="ot">(λ</span> <span class="ot">_</span> <span class="ot">→</span> A<span class="ot">)</span></a></code></pre></div>
+</section><section id="section-15" class="slide level2">
+<h2></h2>
+<p>Тогда рефлексивность можно пеерписать как:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb7-1" data-line-number="1">refl <span class="ot">:</span> <span class="ot">{</span>x <span class="ot">:</span> A<span class="ot">}</span> <span class="ot">→</span> x ≡ x</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">refl <span class="ot">{</span>x <span class="ot">=</span> x<span class="ot">}</span> <span class="ot">=</span> <span class="ot">λ</span> <span class="ot">_</span> <span class="ot">→</span> x</a></code></pre></div>
+</section><section id="section-16" class="slide level2">
+<h2></h2>
+<p>Симметричность:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb8-1" data-line-number="1">sym <span class="ot">:</span> <span class="ot">{</span>x y <span class="ot">:</span> A<span class="ot">}</span> <span class="ot">→</span> x ≡ y <span class="ot">→</span> y ≡ x</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">sym p <span class="ot">=</span> ?</a></code></pre></div>
+</section><section id="section-17" class="slide level2">
+<h2></h2>
+<p>Симметричность:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb9-1" data-line-number="1">sym <span class="ot">:</span> <span class="ot">{</span>x y <span class="ot">:</span> A<span class="ot">}</span> <span class="ot">→</span> x ≡ y <span class="ot">→</span> y ≡ x</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">sym p <span class="ot">=</span> <span class="ot">λ</span> i <span class="ot">→</span> p <span class="ot">(</span>~ i<span class="ot">)</span></a></code></pre></div>
+</section><section id="section-18" class="slide level2">
+<h2></h2>
+<p>Конгруентность:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb10-1" data-line-number="1">cong <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>ℓ&#39;<span class="ot">}</span> <span class="ot">{</span>B <span class="ot">:</span> A <span class="ot">→</span> <span class="dt">Set</span> ℓ&#39;<span class="ot">}</span> <span class="ot">{</span>x y <span class="ot">:</span> A<span class="ot">}</span> <span class="ot">(</span>f <span class="ot">:</span> <span class="ot">(</span>a <span class="ot">:</span> A<span class="ot">)</span> <span class="ot">→</span> B a<span class="ot">)</span> <span class="ot">(</span>p <span class="ot">:</span> x ≡ y<span class="ot">)</span> <span class="ot">→</span> PathP <span class="ot">(λ</span> i <span class="ot">→</span> B <span class="ot">(</span>p i<span class="ot">))</span> <span class="ot">(</span>f x<span class="ot">)</span> <span class="ot">(</span>f y<span class="ot">)</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">cong f p <span class="ot">=</span> <span class="ot">λ</span> i <span class="ot">→</span> f <span class="ot">(</span>p i<span class="ot">)</span></a></code></pre></div>
+</section></section>
+    </div>
+  </div>
+
+  <script src="https://macs-club.github.io/reveal.js/lib/js/head.min.js"></script>
+  <script src="https://macs-club.github.io/reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'https://macs-club.github.io/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'https://macs-club.github.io/reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: 'https://macs-club.github.io/reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
