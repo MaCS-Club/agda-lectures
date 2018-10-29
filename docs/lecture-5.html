@@ -138,10 +138,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Кубическая теория типов это расширение теории типов позволяющее напрямую работать с n-мерными кубами(точка, линия, квадрат, куб и т.д.). Она предлагает новый способ рассуждения о типах тождественности, например, в данной теории доказуема функциональная эктенсиональность и аксиома унивалентности Воеводского.</p>
 </section><section id="section-10" class="slide level2">
 <h2></h2>
-<p>На данном этапе есть экспериментальный компилятор <code>mortberg/cubicaltt</code> и в Agda с версии 2.6.0(не выпущена) ест директива <code>{-# OPTIONS --cubical #-}</code>.</p>
+<p>На данном этапе есть экспериментальный компилятор <code>mortberg/cubicaltt</code> и в Agda с версии 2.6.0(не выпущена) есть директива <code>{-# OPTIONS --cubical #-}</code>.</p>
 </section><section id="тип-интервала" class="slide level2">
 <h2>Тип интервала</h2>
-<p>В кубической теории типов вводится тип интервала <code>I</code>, который топологически соответствует единичному интервалу. В ограниченном контексте этот тип имеет всего два значения начало <code>i0</code> и конец <code>i0</code></p>
+<p>В кубической теории типов вводится тип интервала <code>I</code>, который топологически соответствует единичному интервалу. В ограниченном контексте этот тип имеет всего два значения начало <code>i0</code> и конец <code>i1</code></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb1-1" data-line-number="1">a b <span class="ot">:</span> I</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">a <span class="ot">=</span> i0</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">b <span class="ot">=</span> i1</a></code></pre></div>
@@ -153,7 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb2-3" data-line-number="3">neg <span class="ot">=</span> ~ i</a></code></pre></div>
 </section><section id="section-12" class="slide level2">
 <h2></h2>
-<p>Для типа интервала выполняются все свойства алгебры де Моргана :</p>
+<p>Для типа интервала выполняются все свойства алгебры де Моргана:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb3-1" data-line-number="1">p₁ <span class="ot">:</span> i0 ∨ i    ≡ i</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">p₂ <span class="ot">:</span> i  ∨ i1   ≡ i1</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">p₃ <span class="ot">:</span> i  ∨ j    ≡ j ∨ i</a>
@@ -169,12 +169,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section><section id="section-13" class="slide level2">
 <h2></h2>
 <p>Не зависимый путь:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb5-1" data-line-number="1">Path <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>ℓ<span class="ot">}</span> <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span> ℓ<span class="ot">)</span> <span class="ot">→</span> A <span class="ot">→</span> A <span class="ot">→</span> <span class="dt">Set</span> ℓ</a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb5-1" data-line-number="1">Path <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>α<span class="ot">}</span> <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span> α<span class="ot">)</span> <span class="ot">→</span> A <span class="ot">→</span> A <span class="ot">→</span> <span class="dt">Set</span> α</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">Path A a b <span class="ot">=</span> PathP <span class="ot">(λ</span> <span class="ot">_</span> <span class="ot">→</span> A<span class="ot">)</span> a b</a></code></pre></div>
 </section><section id="section-14" class="slide level2">
 <h2></h2>
 <p>Тип тождественности можно переписать так:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="ot">_</span>≡<span class="ot">_</span> <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>ℓ<span class="ot">}</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span> ℓ<span class="ot">}</span> <span class="ot">→</span> A <span class="ot">→</span> A <span class="ot">→</span> <span class="dt">Set</span> ℓ</a>
+<div class="sourceCode" id="cb6"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="ot">_</span>≡<span class="ot">_</span> <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>α<span class="ot">}</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span> α<span class="ot">}</span> <span class="ot">→</span> A <span class="ot">→</span> A <span class="ot">→</span> <span class="dt">Set</span> α</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="ot">_</span>≡<span class="ot">_</span> <span class="ot">{</span>A <span class="ot">=</span> A<span class="ot">}</span> <span class="ot">=</span> PathP <span class="ot">(λ</span> <span class="ot">_</span> <span class="ot">→</span> A<span class="ot">)</span></a></code></pre></div>
 </section><section id="section-15" class="slide level2">
 <h2></h2>
@@ -194,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section><section id="section-18" class="slide level2">
 <h2></h2>
 <p>Конгруентность:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb10-1" data-line-number="1">cong <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>ℓ&#39;<span class="ot">}</span> <span class="ot">{</span>B <span class="ot">:</span> A <span class="ot">→</span> <span class="dt">Set</span> ℓ&#39;<span class="ot">}</span> <span class="ot">{</span>x y <span class="ot">:</span> A<span class="ot">}</span> <span class="ot">(</span>f <span class="ot">:</span> <span class="ot">(</span>a <span class="ot">:</span> A<span class="ot">)</span> <span class="ot">→</span> B a<span class="ot">)</span> <span class="ot">(</span>p <span class="ot">:</span> x ≡ y<span class="ot">)</span> <span class="ot">→</span> PathP <span class="ot">(λ</span> i <span class="ot">→</span> B <span class="ot">(</span>p i<span class="ot">))</span> <span class="ot">(</span>f x<span class="ot">)</span> <span class="ot">(</span>f y<span class="ot">)</span></a>
+<div class="sourceCode" id="cb10"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb10-1" data-line-number="1">cong <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>β<span class="ot">}</span> <span class="ot">{</span>B <span class="ot">:</span> A <span class="ot">→</span> <span class="dt">Set</span> β<span class="ot">}</span> <span class="ot">{</span>x y <span class="ot">:</span> A<span class="ot">}</span> <span class="ot">(</span>f <span class="ot">:</span> <span class="ot">(</span>a <span class="ot">:</span> A<span class="ot">)</span> <span class="ot">→</span> B a<span class="ot">)</span> <span class="ot">(</span>p <span class="ot">:</span> x ≡ y<span class="ot">)</span> <span class="ot">→</span> PathP <span class="ot">(λ</span> i <span class="ot">→</span> B <span class="ot">(</span>p i<span class="ot">))</span> <span class="ot">(</span>f x<span class="ot">)</span> <span class="ot">(</span>f y<span class="ot">)</span></a>
 <a class="sourceLine" id="cb10-2" data-line-number="2">cong f p <span class="ot">=</span> <span class="ot">λ</span> i <span class="ot">→</span> f <span class="ot">(</span>p i<span class="ot">)</span></a></code></pre></div>
 </section></section>
     </div>
